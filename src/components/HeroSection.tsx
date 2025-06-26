@@ -15,19 +15,19 @@ const HeroSection = () => {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-recipe-accent/10 border border-recipe-accent/20 rounded-full text-sm font-medium text-recipe-accent mb-8 animate-fade-in">
             <Sparkles className="w-4 h-4" />
-            AI-Powered Project Specifications
+            AI-Powered Business Plan Specifications
           </div>
 
           {/* Main Headline */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight mb-8 animate-fade-in">
-            Turn Ideas Into
-            <span className="block text-gradient">Perfect Specs</span>
+            Transform Business Ideas Into
+            <span className="block text-gradient">Professional Specs</span>
           </h1>
 
           {/* Subheadline */}
           <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in">
-            Recipe Specs uses advanced AI to transform your project ideas into comprehensive, 
-            actionable specifications. From concept to code-ready documentation in minutes.
+            BPSpecs transforms your business ideas into comprehensive, investor-ready specifications using advanced AI. 
+            Get detailed business plans, technical requirements, and implementation roadmaps in minutes, not weeks.
           </p>
 
           {/* CTA Buttons */}
@@ -36,7 +36,7 @@ const HeroSection = () => {
               size="lg" 
               className="bg-recipe-accent hover:bg-recipe-accent-dark text-white px-8 py-4 text-lg font-semibold brutalist-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
             >
-              Start Creating Specs
+              Start Creating Business Specs
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
             <Button 
@@ -54,9 +54,9 @@ const HeroSection = () => {
               <div className="w-12 h-12 bg-recipe-accent/10 rounded-xl flex items-center justify-center mb-4">
                 <Brain className="w-6 h-6 text-recipe-accent" />
               </div>
-              <h3 className="font-semibold mb-2">AI-Driven Analysis</h3>
+              <h3 className="font-semibold mb-2">AI Business Analysis</h3>
               <p className="text-sm text-muted-foreground text-center">
-                Advanced AI understands your requirements and generates comprehensive specs
+                Advanced AI understands your business concept and generates comprehensive specifications
               </p>
             </div>
 
@@ -64,9 +64,9 @@ const HeroSection = () => {
               <div className="w-12 h-12 bg-recipe-accent/10 rounded-xl flex items-center justify-center mb-4">
                 <Code className="w-6 h-6 text-recipe-accent" />
               </div>
-              <h3 className="font-semibold mb-2">Code-Ready Output</h3>
+              <h3 className="font-semibold mb-2">Investor-Ready Output</h3>
               <p className="text-sm text-muted-foreground text-center">
-                Specifications formatted for immediate development handoff
+                Professional business plans formatted for immediate investor presentation
               </p>
             </div>
 
@@ -74,9 +74,9 @@ const HeroSection = () => {
               <div className="w-12 h-12 bg-recipe-accent/10 rounded-xl flex items-center justify-center mb-4">
                 <Sparkles className="w-6 h-6 text-recipe-accent" />
               </div>
-              <h3 className="font-semibold mb-2">Instant Generation</h3>
+              <h3 className="font-semibold mb-2">Rapid Generation</h3>
               <p className="text-sm text-muted-foreground text-center">
-                Transform ideas into detailed specs in minutes, not hours
+                Transform business ideas into detailed specifications in minutes, not weeks
               </p>
             </div>
           </div>

@@ -18,7 +18,7 @@ const Header = () => {
               <Zap className="w-5 h-5 text-white" />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg font-bold">Recipe Specs</span>
+              <span className="text-lg font-bold">BPSpecs</span>
               <span className="text-xs text-muted-foreground -mt-1">by Recipe Group</span>
             </div>
           </div>

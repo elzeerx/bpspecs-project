@@ -4,12 +4,12 @@ import { CheckCircle, Star, Zap } from 'lucide-react';
 
 const pricingPlans = [
   {
-    name: "Starter",
+    name: "Startup",
     price: "29",
     period: "per month",
-    description: "Perfect for individual developers and small projects",
+    description: "Perfect for individual entrepreneurs and small startups",
     features: [
-      "Up to 10 specifications per month",
+      "Up to 10 business plans per month",
       "Basic AI templates",
       "PDF export",
       "Email support",
@@ -23,9 +23,9 @@ const pricingPlans = [
     name: "Professional",
     price: "99",
     period: "per month",
-    description: "Ideal for growing teams and multiple projects",
+    description: "Ideal for growing businesses and multiple ventures",
     features: [
-      "Unlimited specifications",
+      "Unlimited business plans",
       "Advanced AI models",
       "Team collaboration",
       "Custom templates",
@@ -41,7 +41,7 @@ const pricingPlans = [
     name: "Enterprise",
     price: "Custom",
     period: "contact us",
-    description: "For large organizations with advanced needs",
+    description: "For accelerators and large organizations",
     features: [
       "Everything in Professional",
       "Custom AI training",
@@ -67,7 +67,7 @@ const PricingSection = () => {
             <span className="block text-gradient">Pricing</span>
           </h2>
           <p className="text-xl text-muted-foreground mb-8">
-            Choose the plan that fits your needs. All plans include a 14-day free trial.
+            Choose the plan that fits your business needs. All plans include a 14-day free trial.
           </p>
           
           {/* Billing Toggle */}
@@ -140,14 +140,14 @@ const PricingSection = () => {
         {/* Trust Indicators */}
         <div className="mt-16 text-center">
           <p className="text-sm text-muted-foreground mb-8">
-            Trusted by developers at leading companies
+            Trusted by entrepreneurs and business leaders
           </p>
           <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
-            <div className="text-lg font-bold">TechCorp</div>
-            <div className="text-lg font-bold">InnovateLabs</div>
-            <div className="text-lg font-bold">DevStudio</div>
-            <div className="text-lg font-bold">CodeForge</div>
-            <div className="text-lg font-bold">BuildTech</div>
+            <div className="text-lg font-bold">StartupHub</div>
+            <div className="text-lg font-bold">VentureLab</div>
+            <div className="text-lg font-bold">BusinessPro</div>
+            <div className="text-lg font-bold">GrowthCorp</div>
+            <div className="text-lg font-bold">LaunchPad</div>
           </div>
         </div>
       </div>
