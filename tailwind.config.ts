@@ -53,17 +53,23 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				recipe: {
-					black: '#000000',
-					charcoal: '#111111',
-					slate: '#1a1a1a',
-					gray: '#333333',
-					silver: '#888888',
-					white: '#ffffff',
-					accent: '#007bff',
-					'accent-dark': '#0056b3',
-					success: '#28a745',
-					warning: '#ffc107'
+				lovable: {
+					purple: '#8B5CF6',
+					'purple-dark': '#7C3AED',
+					'purple-light': '#A78BFA',
+					'purple-bg': '#F3F4F6',
+					gray: {
+						50: '#F9FAFB',
+						100: '#F3F4F6',
+						200: '#E5E7EB',
+						300: '#D1D5DB',
+						400: '#9CA3AF',
+						500: '#6B7280',
+						600: '#4B5563',
+						700: '#374151',
+						800: '#1F2937',
+						900: '#111827',
+					}
 				}
 			},
 			borderRadius: {
@@ -72,8 +78,7 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
-				mono: ['SF Mono', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],
+				sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
 			},
 			fontSize: {
 				'2xs': ['0.625rem', { lineHeight: '0.75rem' }],

@@ -9,41 +9,41 @@ const Header = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm border-b border-gray-100">
+    <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-lg border-b border-lovable-gray-200">
       <div className="container mx-auto px-6">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="text-xl font-medium text-black">
+            <div className="text-xl font-semibold text-lovable-gray-900">
               BPSpecs
             </div>
-            <div className="ml-2 text-sm text-gray-500">
+            <div className="ml-2 text-sm text-lovable-gray-500">
               by Recipe Group
             </div>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-sm text-gray-900 hover:text-recipe-accent transition-colors">
+            <a href="#features" className="text-sm font-medium text-lovable-gray-700 hover:text-lovable-purple transition-colors">
               Features
             </a>
-            <a href="#pricing" className="text-sm text-gray-900 hover:text-recipe-accent transition-colors">
+            <a href="#pricing" className="text-sm font-medium text-lovable-gray-700 hover:text-lovable-purple transition-colors">
               Pricing
             </a>
-            <a href="#about" className="text-sm text-gray-900 hover:text-recipe-accent transition-colors">
+            <a href="#about" className="text-sm font-medium text-lovable-gray-700 hover:text-lovable-purple transition-colors">
               About
             </a>
-            <a href="#contact" className="text-sm text-gray-900 hover:text-recipe-accent transition-colors">
+            <a href="#contact" className="text-sm font-medium text-lovable-gray-700 hover:text-lovable-purple transition-colors">
               Contact
             </a>
           </nav>
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="sm" className="text-gray-900">
+            <Button variant="ghost" size="sm" className="text-lovable-gray-700 hover:text-lovable-purple">
               Sign In
             </Button>
-            <Button size="sm" className="bg-recipe-accent hover:bg-recipe-accent-dark text-white">
+            <Button size="sm" className="bg-lovable-purple hover:bg-lovable-purple-dark text-white rounded-lg">
               Get Started
             </Button>
           </div>
@@ -51,7 +51,7 @@ const Header = () => {
           {/* Mobile Menu Toggle */}
           <button
             onClick={toggleMenu}
-            className="md:hidden p-2 text-gray-900"
+            className="md:hidden p-2 text-lovable-gray-700"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -60,41 +60,41 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-gray-100 py-4">
+          <div className="md:hidden border-t border-lovable-gray-200 py-4">
             <nav className="flex flex-col space-y-4">
               <a 
                 href="#features" 
-                className="text-sm text-gray-900 hover:text-recipe-accent transition-colors py-2"
+                className="text-sm font-medium text-lovable-gray-700 hover:text-lovable-purple transition-colors py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Features
               </a>
               <a 
                 href="#pricing" 
-                className="text-sm text-gray-900 hover:text-recipe-accent transition-colors py-2"
+                className="text-sm font-medium text-lovable-gray-700 hover:text-lovable-purple transition-colors py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Pricing
               </a>
               <a 
                 href="#about" 
-                className="text-sm text-gray-900 hover:text-recipe-accent transition-colors py-2"
+                className="text-sm font-medium text-lovable-gray-700 hover:text-lovable-purple transition-colors py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
               </a>
               <a 
                 href="#contact" 
-                className="text-sm text-gray-900 hover:text-recipe-accent transition-colors py-2"
+                className="text-sm font-medium text-lovable-gray-700 hover:text-lovable-purple transition-colors py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
               </a>
-              <div className="flex flex-col space-y-2 pt-4 border-t border-gray-100">
-                <Button variant="ghost" size="sm" className="justify-start text-gray-900">
+              <div className="flex flex-col space-y-2 pt-4 border-t border-lovable-gray-200">
+                <Button variant="ghost" size="sm" className="justify-start text-lovable-gray-700">
                   Sign In
                 </Button>
-                <Button size="sm" className="bg-recipe-accent hover:bg-recipe-accent-dark text-white justify-start">
+                <Button size="sm" className="bg-lovable-purple hover:bg-lovable-purple-dark text-white justify-start rounded-lg">
                   Get Started
                 </Button>
               </div>

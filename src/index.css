@@ -1,4 +1,5 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,64 +7,64 @@
 @layer base {
   :root {
     --background: 255 255 255;
-    --foreground: 0 0 0;
+    --foreground: 17 24 39;
 
     --card: 255 255 255;
-    --card-foreground: 0 0 0;
+    --card-foreground: 17 24 39;
 
     --popover: 255 255 255;
-    --popover-foreground: 0 0 0;
+    --popover-foreground: 17 24 39;
 
-    --primary: 0 123 255;
+    --primary: 139 92 246;
     --primary-foreground: 255 255 255;
 
-    --secondary: 248 249 250;
-    --secondary-foreground: 0 0 0;
+    --secondary: 243 244 246;
+    --secondary-foreground: 17 24 39;
 
-    --muted: 248 249 250;
-    --muted-foreground: 136 136 136;
+    --muted: 249 250 251;
+    --muted-foreground: 107 114 128;
 
-    --accent: 248 249 250;
-    --accent-foreground: 0 0 0;
+    --accent: 243 244 246;
+    --accent-foreground: 17 24 39;
 
-    --destructive: 220 53 69;
+    --destructive: 239 68 68;
     --destructive-foreground: 255 255 255;
 
-    --border: 229 229 229;
-    --input: 229 229 229;
-    --ring: 0 123 255;
+    --border: 229 231 235;
+    --input: 229 231 235;
+    --ring: 139 92 246;
 
-    --radius: 0.375rem;
+    --radius: 0.5rem;
   }
 
   .dark {
-    --background: 0 0 0;
-    --foreground: 255 255 255;
+    --background: 17 24 39;
+    --foreground: 249 250 251;
 
-    --card: 17 17 17;
-    --card-foreground: 255 255 255;
+    --card: 31 41 55;
+    --card-foreground: 249 250 251;
 
-    --popover: 17 17 17;
-    --popover-foreground: 255 255 255;
+    --popover: 31 41 55;
+    --popover-foreground: 249 250 251;
 
-    --primary: 0 123 255;
+    --primary: 139 92 246;
     --primary-foreground: 255 255 255;
 
-    --secondary: 26 26 26;
-    --secondary-foreground: 255 255 255;
+    --secondary: 31 41 55;
+    --secondary-foreground: 249 250 251;
 
-    --muted: 26 26 26;
-    --muted-foreground: 136 136 136;
+    --muted: 31 41 55;
+    --muted-foreground: 156 163 175;
 
-    --accent: 26 26 26;
-    --accent-foreground: 255 255 255;
+    --accent: 31 41 55;
+    --accent-foreground: 249 250 251;
 
-    --destructive: 220 53 69;
+    --destructive: 239 68 68;
     --destructive-foreground: 255 255 255;
 
-    --border: 26 26 26;
-    --input: 26 26 26;
-    --ring: 0 123 255;
+    --border: 55 65 81;
+    --input: 55 65 81;
+    --ring: 139 92 246;
   }
 }
 
@@ -80,13 +81,13 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-medium;
+    @apply font-semibold;
     letter-spacing: -0.025em;
   }
 }
 
 @layer utilities {
   .text-gradient {
-    @apply bg-gradient-to-r from-recipe-accent to-recipe-accent-dark bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-lovable-purple to-lovable-purple-dark bg-clip-text text-transparent;
   }
 }
