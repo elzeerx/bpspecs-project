@@ -1,40 +1,30 @@
 
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Sparkles, Brain, Code } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const HeroSection = () => {
   return (
-    <section className="py-20 lg:py-32 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-recipe-accent/5 via-transparent to-recipe-accent-dark/5" />
-      <div className="absolute top-20 left-10 w-32 h-32 bg-recipe-accent/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 right-10 w-40 h-40 bg-recipe-accent-dark/10 rounded-full blur-3xl" />
-      
-      <div className="container mx-auto px-4 relative">
+    <section className="py-20 lg:py-32 bg-white">
+      <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-recipe-accent/10 border border-recipe-accent/20 rounded-full text-sm font-medium text-recipe-accent mb-8 animate-fade-in">
-            <Sparkles className="w-4 h-4" />
-            AI-Powered Business Plan Specifications
-          </div>
-
           {/* Main Headline */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight mb-8 animate-fade-in">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight text-black mb-8">
             Transform Business Ideas Into
-            <span className="block text-gradient">Professional Specs</span>
+            <br />
+            <span className="text-recipe-accent">Professional Specs</span>
           </h1>
 
           {/* Subheadline */}
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in">
+          <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
             BPSpecs transforms your business ideas into comprehensive, investor-ready specifications using advanced AI. 
             Get detailed business plans, technical requirements, and implementation roadmaps in minutes, not weeks.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-fade-in">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-20">
             <Button 
               size="lg" 
-              className="bg-recipe-accent hover:bg-recipe-accent-dark text-white px-8 py-4 text-lg font-semibold brutalist-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
+              className="bg-recipe-accent hover:bg-recipe-accent-dark text-white px-8 py-4 text-lg font-medium"
             >
               Start Creating Business Specs
               <ArrowRight className="w-5 h-5 ml-2" />
@@ -42,42 +32,25 @@ const HeroSection = () => {
             <Button 
               variant="outline" 
               size="lg"
-              className="px-8 py-4 text-lg font-semibold border-2 hover:bg-accent"
+              className="px-8 py-4 text-lg font-medium border-gray-300 text-gray-900 hover:bg-gray-50"
             >
               Watch Demo
             </Button>
           </div>
 
-          {/* Feature Icons */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto animate-fade-in">
-            <div className="flex flex-col items-center p-6 rounded-2xl bg-card border border-border hover:border-recipe-accent/50 transition-colors cinematic-glow">
-              <div className="w-12 h-12 bg-recipe-accent/10 rounded-xl flex items-center justify-center mb-4">
-                <Brain className="w-6 h-6 text-recipe-accent" />
-              </div>
-              <h3 className="font-semibold mb-2">AI Business Analysis</h3>
-              <p className="text-sm text-muted-foreground text-center">
-                Advanced AI understands your business concept and generates comprehensive specifications
-              </p>
+          {/* Simple Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
+            <div className="text-center">
+              <div className="text-3xl font-medium text-black mb-2">10x</div>
+              <div className="text-sm text-gray-600">Faster Planning</div>
             </div>
-
-            <div className="flex flex-col items-center p-6 rounded-2xl bg-card border border-border hover:border-recipe-accent/50 transition-colors cinematic-glow">
-              <div className="w-12 h-12 bg-recipe-accent/10 rounded-xl flex items-center justify-center mb-4">
-                <Code className="w-6 h-6 text-recipe-accent" />
-              </div>
-              <h3 className="font-semibold mb-2">Investor-Ready Output</h3>
-              <p className="text-sm text-muted-foreground text-center">
-                Professional business plans formatted for immediate investor presentation
-              </p>
+            <div className="text-center">
+              <div className="text-3xl font-medium text-black mb-2">500+</div>
+              <div className="text-sm text-gray-600">Startups Launched</div>
             </div>
-
-            <div className="flex flex-col items-center p-6 rounded-2xl bg-card border border-border hover:border-recipe-accent/50 transition-colors cinematic-glow">
-              <div className="w-12 h-12 bg-recipe-accent/10 rounded-xl flex items-center justify-center mb-4">
-                <Sparkles className="w-6 h-6 text-recipe-accent" />
-              </div>
-              <h3 className="font-semibold mb-2">Rapid Generation</h3>
-              <p className="text-sm text-muted-foreground text-center">
-                Transform business ideas into detailed specifications in minutes, not weeks
-              </p>
+            <div className="text-center">
+              <div className="text-3xl font-medium text-black mb-2">24/7</div>
+              <div className="text-sm text-gray-600">Expert Support</div>
             </div>
           </div>
         </div>
