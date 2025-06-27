@@ -56,7 +56,7 @@ const HeroSection = () => {
 
             {/* Right Visual - Demo Preview */}
             <div className="relative lg:pl-4 xl:pl-8 lg:flex lg:items-center lg:justify-center">
-              <div className="bg-white p-6 md:p-8 lg:p-8 xl:p-10 shadow-2xl border border-bpspecs-taupe/10 hover:shadow-3xl transition-all duration-500 max-w-lg lg:max-w-xl xl:max-w-xl lg:mx-0 px-[20px] py-[20px] my-0 mx-[70px] rounded-2xl">
+              <div className="bg-white p-6 md:p-8 lg:p-8 xl:p-10 shadow-2xl border border-bpspecs-taupe/10 hover:shadow-3xl transition-all duration-500 max-w-lg lg:max-w-xl xl:max-w-xl lg:mx-0 px-[20px] py-[20px] rounded-2xl my-[25px] mx-[10px]">
                 {/* Input Section */}
                 <div className="bg-gradient-to-r from-bpspecs-off-white to-bpspecs-beige/50 rounded-xl p-6 md:p-8 lg:p-8 mb-6 md:mb-8 lg:mb-8 border border-bpspecs-taupe/20">
                   <div className="text-sm font-semibold text-bpspecs-teal mb-3 md:mb-4 lg:mb-4 uppercase tracking-wide">
