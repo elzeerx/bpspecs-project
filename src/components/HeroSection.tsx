@@ -27,11 +27,11 @@ const HeroSection = () => {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 md:gap-6 lg:gap-6 lg:pt-4">
-                <Button size="lg" className="bg-bpspecs-teal hover:bg-bpspecs-teal/90 text-bpspecs-off-white px-8 md:px-10 lg:px-12 py-5 md:py-6 lg:py-7 text-lg md:text-xl lg:text-xl font-semibold rounded-xl shadow-xl border-0 hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                <Button size="lg" className="bg-bpspecs-teal hover:bg-bpspecs-teal/90 text-bpspecs-off-white px-8 md:px-10 py-5 md:py-6 text-lg md:text-xl rounded-xl shadow-xl border-0 hover:shadow-2xl transition-all duration-300 hover:scale-105 lg:text-xl font-semibold lg:px-[20px] lg:py-[25px] mx-0 my-0">
                   Generate My Business Plan
                   <ArrowRight className="w-5 h-5 md:w-6 md:h-6 ml-3" />
                 </Button>
-                <Button variant="outline" size="lg" className="px-8 md:px-10 lg:px-12 py-5 md:py-6 lg:py-7 text-lg md:text-xl lg:text-xl font-semibold border-2 border-bpspecs-olive text-bpspecs-olive hover:bg-bpspecs-olive hover:text-bpspecs-off-white rounded-xl transition-all duration-300 hover:scale-105">
+                <Button variant="outline" size="lg" className="px-8 md:px-10 py-5 md:py-6 text-lg md:text-xl font-semibold border-2 border-bpspecs-olive text-bpspecs-olive hover:bg-bpspecs-olive hover:text-bpspecs-off-white rounded-xl transition-all duration-300 hover:scale-105 lg:px-[20px] lg:py-[20px] lg:text-lg mx-0 my-0">
                   <Play className="w-5 h-5 md:w-6 md:h-6 mr-3" />
                   See Example Output
                 </Button>
