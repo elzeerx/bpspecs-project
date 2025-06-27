@@ -1,5 +1,5 @@
 
-import { Brain, FileText, Code, Roadmap, Download, Users } from 'lucide-react';
+import { Brain, FileText, Code, Route, Download, Users } from 'lucide-react';
 
 const features = [
   {
@@ -21,7 +21,7 @@ const features = [
     benefit: "Reduce development time by 60%"
   },
   {
-    icon: Roadmap,
+    icon: Route,
     title: "Implementation Roadmap",
     description: "Prioritized phases with realistic timelines, milestones, and resource requirements for execution.",
     benefit: "Clear path from idea to launch"
