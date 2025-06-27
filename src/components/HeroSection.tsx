@@ -9,7 +9,7 @@ const HeroSection = () => {
             <div className="text-left space-y-6 md:space-y-8 lg:space-y-8 lg:flex lg:flex-col lg:justify-center">
               {/* Main Headline */}
               <div className="space-y-3 md:space-y-4 lg:space-y-6">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-bpspecs-dark-charcoal leading-[1.1] lg:leading-[1.05]">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-bpspecs-dark-charcoal leading-[1.1] lg:leading-[1.05] px-0 xl:text-6xl">
                   Turn Your Business Idea Into
                   <br />
                   <span className="text-gradient">Investor-Ready Specifications</span>
