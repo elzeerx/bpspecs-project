@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -6,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Eye, EyeOff, Mail, Lock, User, Github, Shield, Check, X } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, User, Github, Check, X } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 
 const Signup = () => {
@@ -23,7 +22,7 @@ const Signup = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
-  const { signUp, user } = useAuth();
+  const { signUp, signInWithGoogle, signInWithGitHub, user } = useAuth();
   const navigate = useNavigate();
 
   // Redirect if already logged in
@@ -115,14 +114,16 @@ const Signup = () => {
     setIsLoading(false);
   };
 
-  const handleGoogleSignUp = () => {
-    // TODO: Implement Google OAuth
-    console.log('Google sign up clicked');
+  const handleGoogleSignUp = async () => {
+    setIsLoading(true);
+    await signInWithGoogle();
+    setIsLoading(false);
   };
 
-  const handleGitHubSignUp = () => {
-    // TODO: Implement GitHub OAuth
-    console.log('GitHub sign up clicked');
+  const handleGitHubSignUp = async () => {
+    setIsLoading(true);
+    await signInWithGitHub();
+    setIsLoading(false);
   };
 
   const strength = getPasswordStrength();

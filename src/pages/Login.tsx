@@ -17,7 +17,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string; general?: string }>({});
 
-  const { signIn, user } = useAuth();
+  const { signIn, signInWithGoogle, signInWithGitHub, user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -63,14 +63,16 @@ const Login = () => {
     setIsLoading(false);
   };
 
-  const handleGoogleSignIn = () => {
-    // TODO: Implement Google OAuth
-    console.log('Google sign in clicked');
+  const handleGoogleSignIn = async () => {
+    setIsLoading(true);
+    await signInWithGoogle();
+    setIsLoading(false);
   };
 
-  const handleGitHubSignIn = () => {
-    // TODO: Implement GitHub OAuth
-    console.log('GitHub sign in clicked');
+  const handleGitHubSignIn = async () => {
+    setIsLoading(true);
+    await signInWithGitHub();
+    setIsLoading(false);
   };
 
   return (
