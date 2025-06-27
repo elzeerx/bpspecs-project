@@ -9,7 +9,256 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string | null
+          credits_remaining: number | null
+          credits_used_this_month: number | null
+          email: string
+          full_name: string | null
+          id: string
+          last_credit_reset: string | null
+          subscription_tier: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string | null
+          credits_remaining?: number | null
+          credits_used_this_month?: number | null
+          email: string
+          full_name?: string | null
+          id: string
+          last_credit_reset?: string | null
+          subscription_tier?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string | null
+          credits_remaining?: number | null
+          credits_used_this_month?: number | null
+          email?: string
+          full_name?: string | null
+          id?: string
+          last_credit_reset?: string | null
+          subscription_tier?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      project_versions: {
+        Row: {
+          changes_made: string | null
+          created_at: string | null
+          created_by: string | null
+          id: string
+          project_id: string | null
+          specification_data: Json
+          version_number: number
+        }
+        Insert: {
+          changes_made?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          id?: string
+          project_id?: string | null
+          specification_data: Json
+          version_number: number
+        }
+        Update: {
+          changes_made?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          id?: string
+          project_id?: string | null
+          specification_data?: Json
+          version_number?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_versions_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_versions_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      projects: {
+        Row: {
+          ai_analysis: Json | null
+          business_model: string | null
+          created_at: string | null
+          description: string | null
+          generated_specification: Json
+          id: string
+          is_shared: boolean | null
+          original_prompt: string
+          project_type: string
+          share_token: string | null
+          status: string | null
+          target_market: string | null
+          title: string
+          updated_at: string | null
+          user_id: string | null
+          version: number | null
+        }
+        Insert: {
+          ai_analysis?: Json | null
+          business_model?: string | null
+          created_at?: string | null
+          description?: string | null
+          generated_specification?: Json
+          id?: string
+          is_shared?: boolean | null
+          original_prompt: string
+          project_type: string
+          share_token?: string | null
+          status?: string | null
+          target_market?: string | null
+          title: string
+          updated_at?: string | null
+          user_id?: string | null
+          version?: number | null
+        }
+        Update: {
+          ai_analysis?: Json | null
+          business_model?: string | null
+          created_at?: string | null
+          description?: string | null
+          generated_specification?: Json
+          id?: string
+          is_shared?: boolean | null
+          original_prompt?: string
+          project_type?: string
+          share_token?: string | null
+          status?: string | null
+          target_market?: string | null
+          title?: string
+          updated_at?: string | null
+          user_id?: string | null
+          version?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "projects_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      subscriptions: {
+        Row: {
+          auto_renew: boolean | null
+          created_at: string | null
+          current_period_end: string | null
+          current_period_start: string | null
+          id: string
+          paypal_subscription_id: string | null
+          plan_name: string
+          status: string
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          auto_renew?: boolean | null
+          created_at?: string | null
+          current_period_end?: string | null
+          current_period_start?: string | null
+          id?: string
+          paypal_subscription_id?: string | null
+          plan_name: string
+          status: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          auto_renew?: boolean | null
+          created_at?: string | null
+          current_period_end?: string | null
+          current_period_start?: string | null
+          id?: string
+          paypal_subscription_id?: string | null
+          plan_name?: string
+          status?: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subscriptions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      usage_logs: {
+        Row: {
+          action: string
+          ai_model_used: string | null
+          created_at: string | null
+          credits_used: number | null
+          id: string
+          metadata: Json | null
+          processing_time_ms: number | null
+          project_id: string | null
+          tokens_consumed: number | null
+          user_id: string | null
+        }
+        Insert: {
+          action: string
+          ai_model_used?: string | null
+          created_at?: string | null
+          credits_used?: number | null
+          id?: string
+          metadata?: Json | null
+          processing_time_ms?: number | null
+          project_id?: string | null
+          tokens_consumed?: number | null
+          user_id?: string | null
+        }
+        Update: {
+          action?: string
+          ai_model_used?: string | null
+          created_at?: string | null
+          credits_used?: number | null
+          id?: string
+          metadata?: Json | null
+          processing_time_ms?: number | null
+          project_id?: string | null
+          tokens_consumed?: number | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "usage_logs_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "usage_logs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

@@ -2,12 +2,21 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, User, LogOut } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { useProfile } from '@/hooks/useProfile';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, signOut } = useAuth();
+  const { profile } = useProfile();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  const handleSignOut = async () => {
+    await signOut();
+    setIsMenuOpen(false);
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full bg-bpspecs-off-white/90 backdrop-blur-sm border-b border-bpspecs-taupe/20">
@@ -50,16 +59,36 @@ const Header = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link to="/login">
-              <Button variant="ghost" size="sm" className="text-bpspecs-dark-charcoal hover:text-bpspecs-teal hover:bg-bpspecs-beige/30">
-                Sign In
-              </Button>
-            </Link>
-            <Link to="/signup">
-              <Button size="sm" className="bg-bpspecs-teal hover:bg-bpspecs-teal/90 text-bpspecs-off-white font-medium px-6 py-2 rounded-lg shadow-sm">
-                Get Started
-              </Button>
-            </Link>
+            {user ? (
+              <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-2 text-sm text-bpspecs-dark-charcoal">
+                  <User className="w-4 h-4" />
+                  <span>{profile?.full_name || user.email}</span>
+                </div>
+                <Button
+                  onClick={handleSignOut}
+                  variant="ghost"
+                  size="sm"
+                  className="text-bpspecs-dark-charcoal hover:text-bpspecs-teal hover:bg-bpspecs-beige/30"
+                >
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Sign Out
+                </Button>
+              </div>
+            ) : (
+              <>
+                <Link to="/login">
+                  <Button variant="ghost" size="sm" className="text-bpspecs-dark-charcoal hover:text-bpspecs-teal hover:bg-bpspecs-beige/30">
+                    Sign In
+                  </Button>
+                </Link>
+                <Link to="/signup">
+                  <Button size="sm" className="bg-bpspecs-teal hover:bg-bpspecs-teal/90 text-bpspecs-off-white font-medium px-6 py-2 rounded-lg shadow-sm">
+                    Get Started
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -105,16 +134,36 @@ const Header = () => {
                 Contact
               </a>
               <div className="flex flex-col space-y-3 pt-4 border-t border-bpspecs-taupe/20">
-                <Link to="/login" onClick={() => setIsMenuOpen(false)}>
-                  <Button variant="ghost" size="sm" className="justify-start text-bpspecs-dark-charcoal hover:text-bpspecs-teal">
-                    Sign In
-                  </Button>
-                </Link>
-                <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
-                  <Button size="sm" className="bg-bpspecs-teal hover:bg-bpspecs-teal/90 text-bpspecs-off-white justify-start rounded-lg">
-                    Get Started
-                  </Button>
-                </Link>
+                {user ? (
+                  <>
+                    <div className="flex items-center space-x-2 text-sm text-bpspecs-dark-charcoal py-2">
+                      <User className="w-4 h-4" />
+                      <span>{profile?.full_name || user.email}</span>
+                    </div>
+                    <Button
+                      onClick={handleSignOut}
+                      variant="ghost"
+                      size="sm"
+                      className="justify-start text-bpspecs-dark-charcoal hover:text-bpspecs-teal"
+                    >
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Sign Out
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/login" onClick={() => setIsMenuOpen(false)}>
+                      <Button variant="ghost" size="sm" className="justify-start text-bpspecs-dark-charcoal hover:text-bpspecs-teal">
+                        Sign In
+                      </Button>
+                    </Link>
+                    <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
+                      <Button size="sm" className="bg-bpspecs-teal hover:bg-bpspecs-teal/90 text-bpspecs-off-white justify-start rounded-lg">
+                        Get Started
+                      </Button>
+                    </Link>
+                  </>
+                )}
               </div>
             </nav>
           </div>
