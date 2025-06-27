@@ -20,7 +20,7 @@ const HeroSection = () => {
               </div>
 
               {/* Subheadline */}
-              <p className="text-lg md:text-xl lg:text-2xl xl:text-2xl text-bpspecs-taupe leading-relaxed font-medium max-w-2xl lg:leading-[1.4]">
+              <p className="text-lg md:text-xl lg:text-2xl text-bpspecs-taupe leading-relaxed font-medium max-w-2xl lg:leading-[1.4] xl:text-lg">
                 AI-powered business plan generator that creates comprehensive specifications, 
                 technical requirements, and implementation roadmaps that impress investors and guide developers.
               </p>
