@@ -53,23 +53,13 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				lovable: {
-					purple: '#8B5CF6',
-					'purple-dark': '#7C3AED',
-					'purple-light': '#A78BFA',
-					'purple-bg': '#F3F4F6',
-					gray: {
-						50: '#F9FAFB',
-						100: '#F3F4F6',
-						200: '#E5E7EB',
-						300: '#D1D5DB',
-						400: '#9CA3AF',
-						500: '#6B7280',
-						600: '#4B5563',
-						700: '#374151',
-						800: '#1F2937',
-						900: '#111827',
-					}
+				bpspecs: {
+					'dark-charcoal': '#262626',
+					'off-white': '#efeee9',
+					'taupe': '#988F86',
+					'beige': '#D1C6B8',
+					'olive': '#7A7256',
+					'teal': '#446C77',
 				}
 			},
 			borderRadius: {

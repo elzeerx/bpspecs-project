@@ -36,14 +36,14 @@ const features = [
 
 const FeaturesSection = () => {
   return (
-    <section id="features" className="py-20 lg:py-32 bg-lovable-gray-50">
-      <div className="container mx-auto px-6">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-lovable-gray-900">
+    <section id="features" className="py-24 lg:py-32 bg-bpspecs-dark-charcoal">
+      <div className="container mx-auto px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center mb-20">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 text-bpspecs-off-white leading-tight">
             Everything You Need to<br />
             <span className="text-gradient">Build Business Plans</span>
           </h2>
-          <p className="text-xl text-lovable-gray-600">
+          <p className="text-xl text-bpspecs-beige leading-relaxed font-medium">
             BPSpecs combines the power of AI with Recipe Group's expertise 
             in business strategy to create the ultimate business plan specification tool.
           </p>
@@ -53,14 +53,14 @@ const FeaturesSection = () => {
           {features.map((feature, index) => (
             <div 
               key={index}
-              className="group p-8 bg-white rounded-xl border border-lovable-gray-200 hover:border-lovable-purple/30 hover:shadow-lg transition-all duration-200"
+              className="group p-8 bg-bpspecs-off-white rounded-xl border border-bpspecs-taupe/20 hover:border-bpspecs-teal/40 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
             >
-              <div className="w-12 h-12 bg-lovable-purple/10 rounded-lg flex items-center justify-center mb-6">
-                <feature.icon className="w-6 h-6 text-lovable-purple" />
+              <div className="w-14 h-14 bg-bpspecs-teal/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-bpspecs-teal/20 transition-colors duration-200">
+                <feature.icon className="w-7 h-7 text-bpspecs-teal" />
               </div>
               
-              <h3 className="text-xl font-semibold mb-4 text-lovable-gray-900">{feature.title}</h3>
-              <p className="text-lovable-gray-600 leading-relaxed">
+              <h3 className="text-xl font-bold mb-4 text-bpspecs-dark-charcoal">{feature.title}</h3>
+              <p className="text-bpspecs-taupe leading-relaxed">
                 {feature.description}
               </p>
             </div>

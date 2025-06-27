@@ -56,14 +56,14 @@ const pricingPlans = [
 
 const PricingSection = () => {
   return (
-    <section id="pricing" className="py-20 lg:py-32 bg-white">
-      <div className="container mx-auto px-6">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-lovable-gray-900">
+    <section id="pricing" className="py-24 lg:py-32 bg-bpspecs-beige/30">
+      <div className="container mx-auto px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center mb-20">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 text-bpspecs-dark-charcoal leading-tight">
             Simple, Transparent<br />
             <span className="text-gradient">Pricing</span>
           </h2>
-          <p className="text-xl text-lovable-gray-600 mb-8">
+          <p className="text-xl text-bpspecs-taupe mb-8 font-medium leading-relaxed">
             Choose the plan that fits your business needs. All plans include a 14-day free trial.
           </p>
         </div>
@@ -72,27 +72,31 @@ const PricingSection = () => {
           {pricingPlans.map((plan, index) => (
             <div 
               key={index}
-              className={`relative p-8 bg-white rounded-xl border-2 ${plan.popular ? 'border-lovable-purple shadow-lg' : 'border-lovable-gray-200'} transition-all duration-200 ${plan.popular ? '' : 'hover:border-lovable-gray-300'}`}
+              className={`relative p-8 bg-bpspecs-off-white rounded-xl border-2 transition-all duration-300 transform hover:-translate-y-2 ${
+                plan.popular 
+                  ? 'border-bpspecs-teal shadow-xl scale-105' 
+                  : 'border-bpspecs-taupe/30 hover:border-bpspecs-teal/50 hover:shadow-lg'
+              }`}
             >
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <div className="bg-lovable-purple text-white px-4 py-2 text-sm font-semibold rounded-lg">
+                  <div className="bg-bpspecs-teal text-bpspecs-off-white px-6 py-2 text-sm font-bold rounded-lg shadow-md">
                     Most Popular
                   </div>
                 </div>
               )}
 
               <div className="text-center mb-8">
-                <h3 className="text-2xl font-semibold mb-2 text-lovable-gray-900">{plan.name}</h3>
-                <p className="text-lovable-gray-600 mb-4">{plan.description}</p>
+                <h3 className="text-2xl font-bold mb-3 text-bpspecs-dark-charcoal">{plan.name}</h3>
+                <p className="text-bpspecs-taupe mb-6 leading-relaxed">{plan.description}</p>
                 <div className="flex items-baseline justify-center gap-2">
                   {plan.price !== "Custom" ? (
                     <>
-                      <span className="text-4xl font-bold text-lovable-gray-900">${plan.price}</span>
-                      <span className="text-lovable-gray-600">/{plan.period}</span>
+                      <span className="text-5xl font-bold text-bpspecs-dark-charcoal">${plan.price}</span>
+                      <span className="text-bpspecs-taupe font-medium">/{plan.period}</span>
                     </>
                   ) : (
-                    <span className="text-4xl font-bold text-lovable-gray-900">{plan.price}</span>
+                    <span className="text-5xl font-bold text-bpspecs-dark-charcoal">{plan.price}</span>
                   )}
                 </div>
               </div>
@@ -100,16 +104,17 @@ const PricingSection = () => {
               <ul className="space-y-4 mb-8">
                 {plan.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-lovable-gray-700">{feature}</span>
+                    <CheckCircle className="w-5 h-5 text-bpspecs-teal flex-shrink-0 mt-0.5" />
+                    <span className="text-sm text-bpspecs-dark-charcoal font-medium">{feature}</span>
                   </li>
                 ))}
               </ul>
 
               <Button 
-                className={`w-full rounded-lg ${plan.popular 
-                  ? 'bg-lovable-purple hover:bg-lovable-purple-dark text-white' 
-                  : 'bg-white border border-lovable-gray-300 text-lovable-gray-700 hover:bg-lovable-gray-50'
+                className={`w-full rounded-lg font-semibold py-3 transition-all duration-200 ${
+                  plan.popular 
+                    ? 'bg-bpspecs-teal hover:bg-bpspecs-teal/90 text-bpspecs-off-white shadow-lg' 
+                    : 'bg-transparent border-2 border-bpspecs-olive text-bpspecs-olive hover:bg-bpspecs-olive hover:text-bpspecs-off-white'
                 }`}
                 size="lg"
               >
@@ -120,16 +125,16 @@ const PricingSection = () => {
         </div>
 
         {/* Trust Indicators */}
-        <div className="mt-16 text-center">
-          <p className="text-sm text-lovable-gray-600 mb-8">
+        <div className="mt-20 text-center">
+          <p className="text-sm text-bpspecs-taupe mb-8 font-medium uppercase tracking-wide">
             Trusted by entrepreneurs and business leaders
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
-            <div className="text-lg font-semibold text-lovable-gray-700">StartupHub</div>
-            <div className="text-lg font-semibold text-lovable-gray-700">VentureLab</div>
-            <div className="text-lg font-semibold text-lovable-gray-700">BusinessPro</div>
-            <div className="text-lg font-semibold text-lovable-gray-700">GrowthCorp</div>
-            <div className="text-lg font-semibold text-lovable-gray-700">LaunchPad</div>
+          <div className="flex flex-wrap justify-center items-center gap-12 opacity-60">
+            <div className="text-lg font-bold text-bpspecs-dark-charcoal">StartupHub</div>
+            <div className="text-lg font-bold text-bpspecs-dark-charcoal">VentureLab</div>
+            <div className="text-lg font-bold text-bpspecs-dark-charcoal">BusinessPro</div>
+            <div className="text-lg font-bold text-bpspecs-dark-charcoal">GrowthCorp</div>
+            <div className="text-lg font-bold text-bpspecs-dark-charcoal">LaunchPad</div>
           </div>
         </div>
       </div>

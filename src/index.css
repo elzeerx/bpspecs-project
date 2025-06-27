@@ -1,70 +1,70 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 255 255 255;
-    --foreground: 17 24 39;
+    --background: 239 238 233; /* BPSpecs off-white */
+    --foreground: 38 38 38; /* BPSpecs dark-charcoal */
 
-    --card: 255 255 255;
-    --card-foreground: 17 24 39;
+    --card: 239 238 233;
+    --card-foreground: 38 38 38;
 
-    --popover: 255 255 255;
-    --popover-foreground: 17 24 39;
+    --popover: 239 238 233;
+    --popover-foreground: 38 38 38;
 
-    --primary: 139 92 246;
-    --primary-foreground: 255 255 255;
+    --primary: 68 108 119; /* BPSpecs teal */
+    --primary-foreground: 239 238 233;
 
-    --secondary: 243 244 246;
-    --secondary-foreground: 17 24 39;
+    --secondary: 122 114 86; /* BPSpecs olive */
+    --secondary-foreground: 239 238 233;
 
-    --muted: 249 250 251;
-    --muted-foreground: 107 114 128;
+    --muted: 209 198 184; /* BPSpecs beige */
+    --muted-foreground: 38 38 38;
 
-    --accent: 243 244 246;
-    --accent-foreground: 17 24 39;
+    --accent: 152 143 134; /* BPSpecs taupe */
+    --accent-foreground: 38 38 38;
 
     --destructive: 239 68 68;
-    --destructive-foreground: 255 255 255;
+    --destructive-foreground: 239 238 233;
 
-    --border: 229 231 235;
-    --input: 229 231 235;
-    --ring: 139 92 246;
+    --border: 152 143 134;
+    --input: 152 143 134;
+    --ring: 68 108 119;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
   }
 
   .dark {
-    --background: 17 24 39;
-    --foreground: 249 250 251;
+    --background: 38 38 38;
+    --foreground: 239 238 233;
 
-    --card: 31 41 55;
-    --card-foreground: 249 250 251;
+    --card: 38 38 38;
+    --card-foreground: 239 238 233;
 
-    --popover: 31 41 55;
-    --popover-foreground: 249 250 251;
+    --popover: 38 38 38;
+    --popover-foreground: 239 238 233;
 
-    --primary: 139 92 246;
-    --primary-foreground: 255 255 255;
+    --primary: 68 108 119;
+    --primary-foreground: 239 238 233;
 
-    --secondary: 31 41 55;
-    --secondary-foreground: 249 250 251;
+    --secondary: 122 114 86;
+    --secondary-foreground: 239 238 233;
 
-    --muted: 31 41 55;
-    --muted-foreground: 156 163 175;
+    --muted: 152 143 134;
+    --muted-foreground: 239 238 233;
 
-    --accent: 31 41 55;
-    --accent-foreground: 249 250 251;
+    --accent: 152 143 134;
+    --accent-foreground: 239 238 233;
 
     --destructive: 239 68 68;
-    --destructive-foreground: 255 255 255;
+    --destructive-foreground: 239 238 233;
 
-    --border: 55 65 81;
-    --input: 55 65 81;
-    --ring: 139 92 246;
+    --border: 152 143 134;
+    --input: 152 143 134;
+    --ring: 68 108 119;
   }
 }
 
@@ -88,6 +88,6 @@
 
 @layer utilities {
   .text-gradient {
-    @apply bg-gradient-to-r from-lovable-purple to-lovable-purple-dark bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-bpspecs-teal to-bpspecs-olive bg-clip-text text-transparent;
   }
 }
