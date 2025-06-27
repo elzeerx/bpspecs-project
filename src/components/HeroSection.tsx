@@ -14,7 +14,7 @@ const HeroSection = () => {
                   <br />
                   <span className="text-gradient">Investor-Ready Specifications</span>
                 </h1>
-                <p className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-medium text-bpspecs-taupe leading-relaxed lg:leading-[1.2]">
+                <p className="text-2xl md:text-3xl lg:text-4xl font-medium text-bpspecs-taupe leading-relaxed lg:leading-[1.2] xl:text-4xl">
                   in Minutes
                 </p>
               </div>
