@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 
@@ -13,7 +14,7 @@ const Header = () => {
       <div className="container mx-auto px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-3">
+          <Link to="/" className="flex items-center space-x-3">
             <div className="w-10 h-10 flex items-center justify-center">
               <img 
                 src="/lovable-uploads/ef90fafa-e4b6-4c2f-b1b1-eb84d638b33f.png" 
@@ -29,7 +30,7 @@ const Header = () => {
                 by Recipe Group
               </div>
             </div>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
@@ -49,12 +50,16 @@ const Header = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="sm" className="text-bpspecs-dark-charcoal hover:text-bpspecs-teal hover:bg-bpspecs-beige/30">
-              Sign In
-            </Button>
-            <Button size="sm" className="bg-bpspecs-teal hover:bg-bpspecs-teal/90 text-bpspecs-off-white font-medium px-6 py-2 rounded-lg shadow-sm">
-              Get Started
-            </Button>
+            <Link to="/login">
+              <Button variant="ghost" size="sm" className="text-bpspecs-dark-charcoal hover:text-bpspecs-teal hover:bg-bpspecs-beige/30">
+                Sign In
+              </Button>
+            </Link>
+            <Link to="/signup">
+              <Button size="sm" className="bg-bpspecs-teal hover:bg-bpspecs-teal/90 text-bpspecs-off-white font-medium px-6 py-2 rounded-lg shadow-sm">
+                Get Started
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -100,12 +105,16 @@ const Header = () => {
                 Contact
               </a>
               <div className="flex flex-col space-y-3 pt-4 border-t border-bpspecs-taupe/20">
-                <Button variant="ghost" size="sm" className="justify-start text-bpspecs-dark-charcoal hover:text-bpspecs-teal">
-                  Sign In
-                </Button>
-                <Button size="sm" className="bg-bpspecs-teal hover:bg-bpspecs-teal/90 text-bpspecs-off-white justify-start rounded-lg">
-                  Get Started
-                </Button>
+                <Link to="/login" onClick={() => setIsMenuOpen(false)}>
+                  <Button variant="ghost" size="sm" className="justify-start text-bpspecs-dark-charcoal hover:text-bpspecs-teal">
+                    Sign In
+                  </Button>
+                </Link>
+                <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
+                  <Button size="sm" className="bg-bpspecs-teal hover:bg-bpspecs-teal/90 text-bpspecs-off-white justify-start rounded-lg">
+                    Get Started
+                  </Button>
+                </Link>
               </div>
             </nav>
           </div>
