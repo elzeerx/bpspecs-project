@@ -1,78 +1,86 @@
 
 import { Button } from '@/components/ui/button';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, Star } from 'lucide-react';
 
 const pricingPlans = [
   {
-    name: "Startup",
-    price: "29",
-    period: "per month",
-    description: "Perfect for individual entrepreneurs and small startups",
+    name: "Free",
+    price: "0",
+    period: "forever",
+    description: "Perfect for trying out BPSpecs with your first business idea",
     features: [
-      "Up to 10 business plans per month",
+      "3 business plans per month",
       "Basic AI templates",
       "PDF export",
       "Email support",
       "Community access"
     ],
-    cta: "Start Free Trial",
-    popular: false
+    cta: "Start Free",
+    popular: false,
+    highlight: "No credit card required"
   },
   {
-    name: "Professional",
-    price: "99",
+    name: "Pro",
+    price: "29",
     period: "per month",
-    description: "Ideal for growing businesses and multiple ventures",
+    description: "Ideal for entrepreneurs and small business owners",
     features: [
       "Unlimited business plans",
       "Advanced AI models",
-      "Team collaboration",
-      "Custom templates",
+      "All export formats",
       "Priority support",
+      "Custom templates",
       "Version control",
-      "API access"
+      "Team sharing (up to 3 members)"
     ],
     cta: "Start Free Trial",
-    popular: true
+    popular: true,
+    highlight: "Most popular choice"
   },
   {
-    name: "Enterprise",
-    price: "Custom",
-    period: "contact us",
-    description: "For accelerators and large organizations",
+    name: "Team",
+    price: "79",
+    period: "per month",
+    description: "For consultants, accelerators, and growing teams",
     features: [
-      "Everything in Professional",
-      "Custom AI training",
-      "Private deployment",
-      "SSO integration",
-      "Dedicated support",
-      "SLA guarantee",
-      "Custom integrations"
+      "Everything in Pro",
+      "Unlimited team members",
+      "Advanced collaboration",
+      "White-label reports",
+      "API access",
+      "Custom integrations",
+      "Dedicated account manager",
+      "SLA guarantee"
     ],
-    cta: "Contact Sales",
-    popular: false
+    cta: "Start Free Trial",
+    popular: false,
+    highlight: "Best for teams"
   }
 ];
 
 const PricingSection = () => {
   return (
-    <section id="pricing" className="py-24 lg:py-32 bg-bpspecs-beige/30">
+    <section id="pricing" className="py-20 lg:py-32 bg-bpspecs-off-white">
       <div className="container mx-auto px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center mb-20">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 text-bpspecs-dark-charcoal leading-tight">
-            Simple, Transparent<br />
-            <span className="text-gradient">Pricing</span>
+        <div className="max-w-4xl mx-auto text-center mb-16">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-bpspecs-dark-charcoal leading-tight">
+            Simple Pricing,<br />
+            <span className="text-gradient">Powerful Results</span>
           </h2>
           <p className="text-xl text-bpspecs-taupe mb-8 font-medium leading-relaxed">
-            Choose the plan that fits your business needs. All plans include a 14-day free trial.
+            Start free and upgrade when you're ready. All paid plans include a 14-day free trial.
           </p>
+          <div className="inline-flex items-center gap-2 bg-bpspecs-teal/10 text-bpspecs-teal px-4 py-2 rounded-full text-sm font-semibold">
+            <Star className="w-4 h-4" />
+            <span>Save 20% with annual billing</span>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {pricingPlans.map((plan, index) => (
             <div 
               key={index}
-              className={`relative p-8 bg-bpspecs-off-white rounded-xl border-2 transition-all duration-300 transform hover:-translate-y-2 ${
+              className={`relative p-8 bg-white rounded-xl border-2 transition-all duration-300 transform hover:-translate-y-2 ${
                 plan.popular 
                   ? 'border-bpspecs-teal shadow-xl scale-105' 
                   : 'border-bpspecs-taupe/30 hover:border-bpspecs-teal/50 hover:shadow-lg'
@@ -87,18 +95,13 @@ const PricingSection = () => {
               )}
 
               <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold mb-3 text-bpspecs-dark-charcoal">{plan.name}</h3>
-                <p className="text-bpspecs-taupe mb-6 leading-relaxed">{plan.description}</p>
-                <div className="flex items-baseline justify-center gap-2">
-                  {plan.price !== "Custom" ? (
-                    <>
-                      <span className="text-5xl font-bold text-bpspecs-dark-charcoal">${plan.price}</span>
-                      <span className="text-bpspecs-taupe font-medium">/{plan.period}</span>
-                    </>
-                  ) : (
-                    <span className="text-5xl font-bold text-bpspecs-dark-charcoal">{plan.price}</span>
-                  )}
+                <h3 className="text-2xl font-bold mb-2 text-bpspecs-dark-charcoal">{plan.name}</h3>
+                <p className="text-bpspecs-taupe mb-6 leading-relaxed text-sm">{plan.description}</p>
+                <div className="flex items-baseline justify-center gap-2 mb-2">
+                  <span className="text-5xl font-bold text-bpspecs-dark-charcoal">${plan.price}</span>
+                  <span className="text-bpspecs-taupe font-medium">/{plan.period}</span>
                 </div>
+                <div className="text-sm text-bpspecs-teal font-semibold">{plan.highlight}</div>
               </div>
 
               <ul className="space-y-4 mb-8">
@@ -124,17 +127,24 @@ const PricingSection = () => {
           ))}
         </div>
 
-        {/* Trust Indicators */}
-        <div className="mt-20 text-center">
-          <p className="text-sm text-bpspecs-taupe mb-8 font-medium uppercase tracking-wide">
-            Trusted by entrepreneurs and business leaders
+        {/* Additional Information */}
+        <div className="mt-16 text-center">
+          <p className="text-bpspecs-taupe mb-6">
+            All plans include bank-level security, 99.9% uptime guarantee, and access to our business planning experts.
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-12 opacity-60">
-            <div className="text-lg font-bold text-bpspecs-dark-charcoal">StartupHub</div>
-            <div className="text-lg font-bold text-bpspecs-dark-charcoal">VentureLab</div>
-            <div className="text-lg font-bold text-bpspecs-dark-charcoal">BusinessPro</div>
-            <div className="text-lg font-bold text-bpspecs-dark-charcoal">GrowthCorp</div>
-            <div className="text-lg font-bold text-bpspecs-dark-charcoal">LaunchPad</div>
+          <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-bpspecs-taupe">
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 text-bpspecs-teal" />
+              <span>14-day free trial</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 text-bpspecs-teal" />
+              <span>Cancel anytime</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 text-bpspecs-teal" />
+              <span>Money-back guarantee</span>
+            </div>
           </div>
         </div>
       </div>
