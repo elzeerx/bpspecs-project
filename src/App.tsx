@@ -22,8 +22,139 @@ import Pricing from "./pages/Pricing";
 import About from "./pages/About";
 import Billing from "./pages/Billing";
 import NotFound from "./pages/NotFound";
+import { useAuth } from "@/contexts/AuthContext";
 
 const queryClient = new QueryClient();
+
+// Component to handle root route redirection
+const RootRedirect = () => {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-bpspecs-off-white via-bpspecs-beige/50 to-bpspecs-taupe/30">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-bpspecs-teal"></div>
+      </div>
+    );
+  }
+
+  // Redirect authenticated users to dashboard, unauthenticated to landing
+  return <Navigate to={user ? "/" : "/landing"} replace />;
+};
+
+const AppRoutes = () => (
+  <Routes>
+    {/* Root route - redirect based on auth status */}
+    <Route path="/" element={<RootRedirect />} />
+    
+    {/* Public routes - redirect authenticated users to dashboard */}
+    <Route 
+      path="/landing" 
+      element={
+        <PublicRoute>
+          <Landing />
+        </PublicRoute>
+      } 
+    />
+    <Route 
+      path="/login" 
+      element={
+        <PublicRoute>
+          <Login />
+        </PublicRoute>
+      } 
+    />
+    <Route 
+      path="/signup" 
+      element={
+        <PublicRoute>
+          <Signup />
+        </PublicRoute>
+      } 
+    />
+    <Route 
+      path="/forgot-password" 
+      element={
+        <PublicRoute>
+          <ForgotPassword />
+        </PublicRoute>
+      } 
+    />
+    <Route 
+      path="/reset-password" 
+      element={
+        <PublicRoute>
+          <ResetPassword />
+        </PublicRoute>
+      } 
+    />
+    
+    {/* Public marketing pages - accessible to everyone */}
+    <Route path="/pricing" element={<Pricing />} />
+    <Route path="/about" element={<About />} />
+    
+    {/* Protected routes - require authentication */}
+    <Route 
+      path="/dashboard" 
+      element={
+        <ProtectedRoute>
+          <Dashboard />
+        </ProtectedRoute>
+      } 
+    />
+    <Route 
+      path="/create-project" 
+      element={
+        <ProtectedRoute>
+          <CreateProjectChat />
+        </ProtectedRoute>
+      } 
+    />
+    <Route 
+      path="/create-project-wizard" 
+      element={
+        <ProtectedRoute>
+          <CreateProject />
+        </ProtectedRoute>
+      } 
+    />
+    <Route 
+      path="/projects" 
+      element={
+        <ProtectedRoute>
+          <Projects />
+        </ProtectedRoute>
+      } 
+    />
+    <Route 
+      path="/projects/:id" 
+      element={
+        <ProtectedRoute>
+          <ProjectViewer />
+        </ProtectedRoute>
+      } 
+    />
+    <Route 
+      path="/settings" 
+      element={
+        <ProtectedRoute>
+          <Settings />
+        </ProtectedRoute>
+      } 
+    />
+    <Route 
+      path="/billing" 
+      element={
+        <ProtectedRoute>
+          <Billing />
+        </ProtectedRoute>
+      } 
+    />
+    
+    {/* Catch-all route */}
+    <Route path="*" element={<NotFound />} />
+  </Routes>
+);
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -32,112 +163,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Routes>
-            {/* Public routes - redirect authenticated users to dashboard */}
-            <Route 
-              path="/landing" 
-              element={
-                <PublicRoute>
-                  <Landing />
-                </PublicRoute>
-              } 
-            />
-            <Route 
-              path="/login" 
-              element={
-                <PublicRoute>
-                  <Login />
-                </PublicRoute>
-              } 
-            />
-            <Route 
-              path="/signup" 
-              element={
-                <PublicRoute>
-                  <Signup />
-                </PublicRoute>
-              } 
-            />
-            <Route 
-              path="/forgot-password" 
-              element={
-                <PublicRoute>
-                  <ForgotPassword />
-                </PublicRoute>
-              } 
-            />
-            <Route 
-              path="/reset-password" 
-              element={
-                <PublicRoute>
-                  <ResetPassword />
-                </PublicRoute>
-              } 
-            />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/about" element={<About />} />
-            
-            {/* Protected routes - require authentication */}
-            <Route 
-              path="/" 
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/create-project" 
-              element={
-                <ProtectedRoute>
-                  <CreateProjectChat />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/create-project-wizard" 
-              element={
-                <ProtectedRoute>
-                  <CreateProject />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/projects" 
-              element={
-                <ProtectedRoute>
-                  <Projects />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/projects/:id" 
-              element={
-                <ProtectedRoute>
-                  <ProjectViewer />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/settings" 
-              element={
-                <ProtectedRoute>
-                  <Settings />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/billing" 
-              element={
-                <ProtectedRoute>
-                  <Billing />
-                </ProtectedRoute>
-              } 
-            />
-            
-            {/* Catch-all route */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <AppRoutes />
         </BrowserRouter>
       </TooltipProvider>
     </AuthProvider>
