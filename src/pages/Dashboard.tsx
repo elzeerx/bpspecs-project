@@ -27,11 +27,11 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center sm:p-4 bg-gradient-to-br from-bpspecs-off-white via-bpspecs-beige/50 to-bpspecs-taupe/30 pt-2 pr-2 pb-2 pl-2">
-      {/* Main Card */}
-      <div className="relative w-full max-w-6xl backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden bg-bpspecs-dark-charcoal/95 fade-in">
+    <div className="min-h-screen flex items-stretch justify-center p-2 sm:p-4 bg-gradient-to-br from-bpspecs-off-white via-bpspecs-beige/50 to-bpspecs-taupe/30">
+      {/* Main Card - Now responsive and stretches */}
+      <div className="relative w-full backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden bg-bpspecs-dark-charcoal/95 fade-in">
         {/* Side Nav */}
-        <div className="absolute inset-y-0 left-0 flex flex-col gap-2 sm:gap-3 sm:py-6 sm:px-3 pt-4 pr-2 pb-4 pl-2 items-center bg-bpspecs-off-white fade-in fade-in-delay-1">
+        <div className="absolute inset-y-0 left-0 flex flex-col gap-2 sm:gap-3 py-4 sm:py-6 px-2 sm:px-3 items-center bg-bpspecs-off-white fade-in fade-in-delay-1">
           <button className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105 bg-bpspecs-teal text-bpspecs-off-white hover:bg-bpspecs-teal/80">
             <Zap className="w-4 h-4" />
           </button>
@@ -39,21 +39,24 @@ const Dashboard = () => {
             to="/projects"
             className="w-7 h-7 sm:w-9 sm:h-9 rounded-full ring-1 flex items-center justify-center transition-all duration-200 bg-bpspecs-beige ring-bpspecs-taupe hover:bg-bpspecs-taupe/20 hover:ring-bpspecs-teal"
           >
-            <FileText className="sm:w-4 sm:h-4 w-[12px] h-[12px] text-bpspecs-dark-charcoal" />
+            <FileText className="w-3 h-3 sm:w-4 sm:h-4 text-bpspecs-dark-charcoal" />
           </Link>
           <button className="w-7 h-7 sm:w-9 sm:h-9 rounded-full ring-1 flex items-center justify-center transition-all duration-200 bg-bpspecs-beige ring-bpspecs-taupe hover:bg-bpspecs-taupe/20 hover:ring-bpspecs-teal">
-            <Brain className="sm:w-4 sm:h-4 w-[12px] h-[12px] text-bpspecs-dark-charcoal" />
+            <Brain className="w-3 h-3 sm:w-4 sm:h-4 text-bpspecs-dark-charcoal" />
           </button>
-          <button className="w-7 h-7 sm:w-9 sm:h-9 rounded-full ring-1 flex items-center justify-center transition-all duration-200 bg-bpspecs-beige ring-bpspecs-taupe hover:bg-bpspecs-taupe/20 hover:ring-bpspecs-teal">
-            <Settings className="sm:w-4 sm:h-4 w-[12px] h-[12px] text-bpspecs-dark-charcoal" />
-          </button>
+          <Link
+            to="/settings"
+            className="w-7 h-7 sm:w-9 sm:h-9 rounded-full ring-1 flex items-center justify-center transition-all duration-200 bg-bpspecs-beige ring-bpspecs-taupe hover:bg-bpspecs-taupe/20 hover:ring-bpspecs-teal"
+          >
+            <Settings className="w-3 h-3 sm:w-4 sm:h-4 text-bpspecs-dark-charcoal" />
+          </Link>
           <button className="w-7 h-7 sm:w-9 sm:h-9 rounded-full ring-1 flex items-center justify-center transition-all duration-200 mt-auto bg-bpspecs-beige ring-bpspecs-taupe hover:bg-bpspecs-taupe/20 hover:ring-bpspecs-teal">
-            <History className="sm:w-4 sm:h-4 w-[12px] h-[12px] text-bpspecs-dark-charcoal" />
+            <History className="w-3 h-3 sm:w-4 sm:h-4 text-bpspecs-dark-charcoal" />
           </button>
         </div>
 
-        {/* Content */}
-        <div className="sm:pl-20 md:pl-24 lg:pl-28 sm:pr-6 md:pr-10 lg:pr-14 sm:pt-6 md:pt-8 sm:pb-10 sm:space-y-8 lg:space-y-10 pt-4 pr-4 pb-6 pl-14 space-y-6">
+        {/* Content - Now fully responsive */}
+        <div className="pl-14 sm:pl-20 md:pl-24 pr-4 sm:pr-6 md:pr-8 lg:pr-12 xl:pr-16 pt-4 sm:pt-6 md:pt-8 pb-6 sm:pb-10 space-y-6 sm:space-y-8 lg:space-y-10">
           {/* Header */}
           <div className="flex items-center justify-between fade-in fade-in-delay-2">
             <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-bpspecs-beige">
@@ -76,30 +79,47 @@ const Dashboard = () => {
             </Button>
           </div>
 
-          {/* Quick Stats */}
+          {/* Quick Stats - Enhanced responsive grid */}
           {!loading && (
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 fade-in fade-in-delay-2">
-              <div className="bg-bpspecs-off-white rounded-xl p-3 sm:p-4 border border-bpspecs-taupe/30">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8 gap-3 sm:gap-4 lg:gap-5 fade-in fade-in-delay-2">
+              <div className="bg-bpspecs-off-white rounded-xl p-3 sm:p-4 border border-bpspecs-taupe/30 col-span-1">
                 <div className="text-lg sm:text-2xl font-bold text-bpspecs-dark-charcoal">{stats.totalProjects}</div>
                 <div className="text-xs sm:text-sm text-bpspecs-taupe">Total Projects</div>
               </div>
-              <div className="bg-bpspecs-off-white rounded-xl p-3 sm:p-4 border border-bpspecs-taupe/30">
+              <div className="bg-bpspecs-off-white rounded-xl p-3 sm:p-4 border border-bpspecs-taupe/30 col-span-1">
                 <div className="text-lg sm:text-2xl font-bold text-bpspecs-teal">{stats.completedProjects}</div>
                 <div className="text-xs sm:text-sm text-bpspecs-taupe">Completed</div>
               </div>
-              <div className="bg-bpspecs-off-white rounded-xl p-3 sm:p-4 border border-bpspecs-taupe/30">
+              <div className="bg-bpspecs-off-white rounded-xl p-3 sm:p-4 border border-bpspecs-taupe/30 col-span-1">
                 <div className="text-lg sm:text-2xl font-bold text-bpspecs-olive">{stats.recentProjects}</div>
                 <div className="text-xs sm:text-sm text-bpspecs-taupe">This Week</div>
               </div>
-              <div className="bg-bpspecs-off-white rounded-xl p-3 sm:p-4 border border-bpspecs-taupe/30">
+              <div className="bg-bpspecs-off-white rounded-xl p-3 sm:p-4 border border-bpspecs-taupe/30 col-span-1">
                 <div className="text-lg sm:text-2xl font-bold text-bpspecs-taupe">3</div>
                 <div className="text-xs sm:text-sm text-bpspecs-taupe">Credits Left</div>
+              </div>
+              {/* Additional stats for larger screens */}
+              <div className="bg-bpspecs-off-white rounded-xl p-3 sm:p-4 border border-bpspecs-taupe/30 col-span-1 hidden xl:block">
+                <div className="text-lg sm:text-2xl font-bold text-bpspecs-teal">85%</div>
+                <div className="text-xs sm:text-sm text-bpspecs-taupe">Success Rate</div>
+              </div>
+              <div className="bg-bpspecs-off-white rounded-xl p-3 sm:p-4 border border-bpspecs-taupe/30 col-span-1 hidden xl:block">
+                <div className="text-lg sm:text-2xl font-bold text-bpspecs-olive">12m</div>
+                <div className="text-xs sm:text-sm text-bpspecs-taupe">Avg Time</div>
+              </div>
+              <div className="bg-bpspecs-off-white rounded-xl p-3 sm:p-4 border border-bpspecs-taupe/30 col-span-1 hidden 2xl:block">
+                <div className="text-lg sm:text-2xl font-bold text-bpspecs-taupe">47</div>
+                <div className="text-xs sm:text-sm text-bpspecs-taupe">Templates</div>
+              </div>
+              <div className="bg-bpspecs-off-white rounded-xl p-3 sm:p-4 border border-bpspecs-taupe/30 col-span-1 hidden 2xl:block">
+                <div className="text-lg sm:text-2xl font-bold text-bpspecs-teal">98%</div>
+                <div className="text-xs sm:text-sm text-bpspecs-taupe">Uptime</div>
               </div>
             </div>
           )}
 
-          {/* Title */}
-          <h1 className="sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl leading-tight max-w-lg text-2xl tracking-tight font-bold text-bpspecs-off-white fade-in fade-in-delay-3">
+          {/* Title - Responsive typography */}
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl leading-tight tracking-tight font-bold text-bpspecs-off-white fade-in fade-in-delay-3">
             Transform Your Business Ideas Into{' '}
             <span className="bg-clip-text text-transparent bg-gradient-to-br from-bpspecs-teal to-bpspecs-olive">
               Professional Specifications
@@ -107,11 +127,11 @@ const Dashboard = () => {
             in Minutes
           </h1>
 
-          {/* Recent Projects */}
+          {/* Recent Projects - Enhanced responsive grid */}
           {!loading && recentProjects.length > 0 && (
             <div className="fade-in fade-in-delay-3">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold text-bpspecs-off-white">Recent Projects</h2>
+              <div className="flex items-center justify-between mb-4 sm:mb-6">
+                <h2 className="text-xl sm:text-2xl font-semibold text-bpspecs-off-white">Recent Projects</h2>
                 <Link 
                   to="/projects"
                   className="text-sm text-bpspecs-teal hover:text-bpspecs-teal/80 flex items-center gap-1"
@@ -119,8 +139,8 @@ const Dashboard = () => {
                   View All <MoreHorizontal className="w-4 h-4" />
                 </Link>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {recentProjects.slice(0, 3).map((project) => (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-5 lg:gap-6">
+                {recentProjects.slice(0, 5).map((project) => (
                   <Card key={project.id} className="bg-bpspecs-off-white border-bpspecs-taupe/30 hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
                     <CardHeader className="pb-3">
                       <div className="flex items-start justify-between">
@@ -160,10 +180,10 @@ const Dashboard = () => {
             </div>
           )}
 
-          {/* Feature Cards */}
+          {/* Feature Cards - Enhanced responsive layout */}
           <div className="relative fade-in fade-in-delay-3">
-            {/* Floating Element */}
-            <div className="hidden xl:block absolute -right-20 -top-16">
+            {/* Floating Element - Repositioned for larger screens */}
+            <div className="hidden 2xl:block absolute -right-8 -top-16">
               <div className="relative">
                 <div className="w-32 h-32 opacity-20 animate-pulse bg-gradient-to-r rounded-full from-bpspecs-teal to-bpspecs-olive"></div>
                 <div className="absolute top-6 right-6 text-sm font-medium rounded-xl pt-2 pr-4 pb-2 pl-4 shadow-lg text-bpspecs-off-white bg-bpspecs-dark-charcoal border border-bpspecs-taupe/20">
@@ -172,13 +192,13 @@ const Dashboard = () => {
               </div>
             </div>
 
-            {/* Feature Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-5">
-              <div className="sm:rounded-2xl sm:p-6 flex flex-col gap-3 sm:gap-4 hover:shadow-lg transition-all duration-200 hover:-translate-y-1 border rounded-xl pt-4 pr-4 pb-4 pl-4 shadow-md bg-bpspecs-off-white border-bpspecs-taupe/30">
+            {/* Feature Cards Grid - More responsive */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
+              <div className="rounded-xl sm:rounded-2xl shadow-md border p-4 sm:p-6 flex flex-col gap-3 sm:gap-4 hover:shadow-lg transition-all duration-200 hover:-translate-y-1 bg-bpspecs-off-white border-bpspecs-taupe/30">
                 <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br flex items-center justify-center from-bpspecs-teal to-bpspecs-olive text-bpspecs-off-white">
                   <Brain className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
-                <p className="sm:text-lg leading-snug text-base font-normal text-bpspecs-dark-charcoal">
+                <p className="text-base sm:text-lg leading-snug font-normal text-bpspecs-dark-charcoal">
                   AI-powered business analysis that detects your business model, target market, and key requirements automatically.
                 </p>
                 <span className="text-xs sm:text-sm font-medium text-bpspecs-taupe">Business Analysis</span>
@@ -188,27 +208,38 @@ const Dashboard = () => {
                 <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br to-bpspecs-olive flex items-center justify-center from-bpspecs-teal text-bpspecs-off-white">
                   <FileText className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
-                <p className="sm:text-lg leading-snug text-base font-normal text-bpspecs-off-white">
+                <p className="text-base sm:text-lg leading-snug font-normal text-bpspecs-off-white">
                   Professional documentation that follows industry standards and impresses investors and stakeholders.
                 </p>
                 <span className="text-xs sm:text-sm text-bpspecs-beige font-medium">Investor-Ready Output</span>
               </div>
 
-              <div className="rounded-xl sm:rounded-2xl shadow-md border p-4 sm:p-6 flex flex-col gap-3 sm:gap-4 hover:shadow-lg transition-all duration-200 hover:-translate-y-1 sm:col-span-2 lg:col-span-1 bg-bpspecs-dark-charcoal border-bpspecs-taupe/20">
+              <div className="rounded-xl sm:rounded-2xl shadow-md border p-4 sm:p-6 flex flex-col gap-3 sm:gap-4 hover:shadow-lg transition-all duration-200 hover:-translate-y-1 bg-bpspecs-dark-charcoal border-bpspecs-taupe/20 sm:col-span-2 lg:col-span-1">
                 <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center bg-gradient-to-bl to-bpspecs-olive text-bpspecs-off-white from-bpspecs-teal">
                   <Route className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
-                <p className="sm:text-lg leading-snug text-base font-normal text-bpspecs-off-white">
+                <p className="text-base sm:text-lg leading-snug font-normal text-bpspecs-off-white">
                   Prioritized phases with realistic timelines, milestones, and resource requirements for execution.
                 </p>
                 <span className="text-xs sm:text-sm text-bpspecs-beige font-medium">Implementation Roadmap</span>
               </div>
+
+              {/* Additional feature card for larger screens */}
+              <div className="rounded-xl sm:rounded-2xl shadow-md border p-4 sm:p-6 flex flex-col gap-3 sm:gap-4 hover:shadow-lg transition-all duration-200 hover:-translate-y-1 bg-bpspecs-off-white border-bpspecs-taupe/30 hidden 2xl:block">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br flex items-center justify-center from-bpspecs-olive to-bpspecs-teal text-bpspecs-off-white">
+                  <Target className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                <p className="text-base sm:text-lg leading-snug font-normal text-bpspecs-dark-charcoal">
+                  Market analysis and competitive positioning to help you understand your business landscape.
+                </p>
+                <span className="text-xs sm:text-sm font-medium text-bpspecs-taupe">Market Insights</span>
+              </div>
             </div>
           </div>
 
-          {/* Input Box */}
-          <div className="max-w-4xl mx-auto fade-in fade-in-delay-3">
-            <div className="sm:rounded-2xl flex flex-col gap-3 sm:gap-4 sm:p-4 md:p-6 border rounded-xl pt-3 pr-3 pb-3 pl-3 shadow-lg bg-bpspecs-off-white border-bpspecs-taupe/30">
+          {/* Input Box - Responsive width */}
+          <div className="fade-in fade-in-delay-3">
+            <div className="rounded-xl sm:rounded-2xl flex flex-col gap-3 sm:gap-4 p-3 sm:p-4 md:p-6 border shadow-lg bg-bpspecs-off-white border-bpspecs-taupe/30">
               <div className="flex items-center justify-between text-xs font-medium text-bpspecs-taupe">
                 <div className="flex items-center gap-1">
                   <Sparkles className="w-3 h-3" />
@@ -237,8 +268,8 @@ const Dashboard = () => {
                 </Button>
               </div>
 
-              {/* Quick Actions */}
-              <div className="flex flex-wrap gap-2">
+              {/* Quick Actions - Enhanced responsive layout */}
+              <div className="flex flex-wrap gap-2 sm:gap-3">
                 <Button
                   onClick={handleGenerateClick}
                   className="flex items-center gap-1 text-xs sm:text-sm font-medium px-2 sm:px-3 py-1 sm:py-1.5 rounded-full transition-all duration-200 hover:scale-105 bg-gradient-to-br text-bpspecs-off-white hover:from-bpspecs-teal/80 hover:to-bpspecs-olive/80 from-bpspecs-teal to-bpspecs-olive border-0"
