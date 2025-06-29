@@ -1,23 +1,22 @@
 
 import { useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 
-interface ProtectedRouteProps {
+interface PublicRouteProps {
   children: React.ReactNode;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
+const PublicRoute: React.FC<PublicRouteProps> = ({ children }) => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
-    if (!loading && !user) {
-      // Redirect to landing page with the current location as state
-      navigate('/landing', { state: { from: location.pathname } });
+    if (!loading && user) {
+      // Redirect authenticated users to dashboard
+      navigate('/');
     }
-  }, [user, loading, navigate, location]);
+  }, [user, loading, navigate]);
 
   // Show loading spinner while checking auth
   if (loading) {
@@ -28,12 +27,12 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     );
   }
 
-  // Don't render children if not authenticated
-  if (!user) {
+  // Don't render children if authenticated (will redirect)
+  if (user) {
     return null;
   }
 
   return <>{children}</>;
 };
 
-export default ProtectedRoute;
+export default PublicRoute;

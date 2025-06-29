@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Menu, X, User, LogOut } from 'lucide-react';
+import { Menu, X, User, LogOut, Settings } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useProfile } from '@/hooks/useProfile';
 
@@ -51,23 +51,34 @@ const Header = () => {
             </div>
           </Link>
 
-          {/* Desktop Navigation - only show on landing page */}
-          {!user && (
-            <nav className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors duration-200">
-                Features
-              </a>
-              <a href="#pricing" className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors duration-200">
-                Pricing
-              </a>
-              <a href="#about" className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors duration-200">
-                About
-              </a>
-              <a href="#contact" className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors duration-200">
-                Contact
-              </a>
-            </nav>
-          )}
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            {!user ? (
+              <>
+                <a href="#features" className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors duration-200">
+                  Features
+                </a>
+                <Link to="/pricing" className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors duration-200">
+                  Pricing
+                </Link>
+                <Link to="/about" className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors duration-200">
+                  About
+                </Link>
+                <a href="#contact" className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors duration-200">
+                  Contact
+                </a>
+              </>
+            ) : (
+              <>
+                <Link to="/projects" className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors duration-200">
+                  Projects
+                </Link>
+                <Link to="/billing" className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors duration-200">
+                  Billing
+                </Link>
+              </>
+            )}
+          </nav>
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
@@ -77,6 +88,12 @@ const Header = () => {
                   <User className="w-4 h-4" />
                   <span>{profile?.full_name || user.email}</span>
                 </div>
+                <Link to="/settings">
+                  <Button variant="ghost" size="sm" className="text-bpspecs-dark-charcoal hover:text-bpspecs-teal hover:bg-bpspecs-beige/30">
+                    <Settings className="w-4 h-4 mr-2" />
+                    Settings
+                  </Button>
+                </Link>
                 <Button
                   onClick={handleSignOut}
                   variant="ghost"
@@ -117,7 +134,7 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden border-t border-bpspecs-taupe/20 py-6 bg-bpspecs-off-white">
             <nav className="flex flex-col space-y-4">
-              {!user && (
+              {!user ? (
                 <>
                   <a 
                     href="#features" 
@@ -126,20 +143,20 @@ const Header = () => {
                   >
                     Features
                   </a>
-                  <a 
-                    href="#pricing" 
+                  <Link 
+                    to="/pricing" 
                     className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors py-2"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Pricing
-                  </a>
-                  <a 
-                    href="#about" 
+                  </Link>
+                  <Link 
+                    to="/about" 
                     className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors py-2"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     About
-                  </a>
+                  </Link>
                   <a 
                     href="#contact" 
                     className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors py-2"
@@ -147,6 +164,23 @@ const Header = () => {
                   >
                     Contact
                   </a>
+                </>
+              ) : (
+                <>
+                  <Link 
+                    to="/projects" 
+                    className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Projects
+                  </Link>
+                  <Link 
+                    to="/billing" 
+                    className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Billing
+                  </Link>
                 </>
               )}
               
@@ -157,6 +191,16 @@ const Header = () => {
                       <User className="w-4 h-4" />
                       <span>{profile?.full_name || user.email}</span>
                     </div>
+                    <Link to="/settings" onClick={() => setIsMenuOpen(false)}>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="justify-start text-bpspecs-dark-charcoal hover:text-bpspecs-teal"
+                      >
+                        <Settings className="w-4 h-4 mr-2" />
+                        Settings
+                      </Button>
+                    </Link>
                     <Button
                       onClick={handleSignOut}
                       variant="ghost"
