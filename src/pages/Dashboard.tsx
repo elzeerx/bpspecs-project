@@ -1,15 +1,29 @@
 
 import { Button } from '@/components/ui/button';
-import { Brain, FileText, Route, Zap, Settings, History, Crown, Target, Users, Lightbulb, Sparkles, ShieldCheck, Command, Send, MoreHorizontal } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Brain, FileText, Route, Zap, Settings, History, Crown, Target, Users, Lightbulb, Sparkles, ShieldCheck, Command, Send, MoreHorizontal, Plus, Calendar, TrendingUp, Eye } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { useProjects } from '@/hooks/useProjects';
+import { formatDistanceToNow } from 'date-fns';
+import { Badge } from '@/components/ui/badge';
 
 const Dashboard = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { recentProjects, stats, loading } = useProjects();
 
   const handleGenerateClick = () => {
     navigate('/create-project');
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'completed': return 'bg-green-100 text-green-800 border-green-200';
+      case 'draft': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+      case 'shared': return 'bg-blue-100 text-blue-800 border-blue-200';
+      default: return 'bg-gray-100 text-gray-800 border-gray-200';
+    }
   };
 
   return (
@@ -21,9 +35,12 @@ const Dashboard = () => {
           <button className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105 bg-bpspecs-teal text-bpspecs-off-white hover:bg-bpspecs-teal/80">
             <Zap className="w-4 h-4" />
           </button>
-          <button className="w-7 h-7 sm:w-9 sm:h-9 rounded-full ring-1 flex items-center justify-center transition-all duration-200 bg-bpspecs-beige ring-bpspecs-taupe hover:bg-bpspecs-taupe/20 hover:ring-bpspecs-teal">
+          <Link 
+            to="/projects"
+            className="w-7 h-7 sm:w-9 sm:h-9 rounded-full ring-1 flex items-center justify-center transition-all duration-200 bg-bpspecs-beige ring-bpspecs-taupe hover:bg-bpspecs-taupe/20 hover:ring-bpspecs-teal"
+          >
             <FileText className="sm:w-4 sm:h-4 w-[12px] h-[12px] text-bpspecs-dark-charcoal" />
-          </button>
+          </Link>
           <button className="w-7 h-7 sm:w-9 sm:h-9 rounded-full ring-1 flex items-center justify-center transition-all duration-200 bg-bpspecs-beige ring-bpspecs-taupe hover:bg-bpspecs-taupe/20 hover:ring-bpspecs-teal">
             <Brain className="sm:w-4 sm:h-4 w-[12px] h-[12px] text-bpspecs-dark-charcoal" />
           </button>
@@ -59,6 +76,28 @@ const Dashboard = () => {
             </Button>
           </div>
 
+          {/* Quick Stats */}
+          {!loading && (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 fade-in fade-in-delay-2">
+              <div className="bg-bpspecs-off-white rounded-xl p-3 sm:p-4 border border-bpspecs-taupe/30">
+                <div className="text-lg sm:text-2xl font-bold text-bpspecs-dark-charcoal">{stats.totalProjects}</div>
+                <div className="text-xs sm:text-sm text-bpspecs-taupe">Total Projects</div>
+              </div>
+              <div className="bg-bpspecs-off-white rounded-xl p-3 sm:p-4 border border-bpspecs-taupe/30">
+                <div className="text-lg sm:text-2xl font-bold text-bpspecs-teal">{stats.completedProjects}</div>
+                <div className="text-xs sm:text-sm text-bpspecs-taupe">Completed</div>
+              </div>
+              <div className="bg-bpspecs-off-white rounded-xl p-3 sm:p-4 border border-bpspecs-taupe/30">
+                <div className="text-lg sm:text-2xl font-bold text-bpspecs-olive">{stats.recentProjects}</div>
+                <div className="text-xs sm:text-sm text-bpspecs-taupe">This Week</div>
+              </div>
+              <div className="bg-bpspecs-off-white rounded-xl p-3 sm:p-4 border border-bpspecs-taupe/30">
+                <div className="text-lg sm:text-2xl font-bold text-bpspecs-taupe">3</div>
+                <div className="text-xs sm:text-sm text-bpspecs-taupe">Credits Left</div>
+              </div>
+            </div>
+          )}
+
           {/* Title */}
           <h1 className="sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl leading-tight max-w-lg text-2xl tracking-tight font-bold text-bpspecs-off-white fade-in fade-in-delay-3">
             Transform Your Business Ideas Into{' '}
@@ -68,7 +107,60 @@ const Dashboard = () => {
             in Minutes
           </h1>
 
-          {/* Cards + Illustration */}
+          {/* Recent Projects */}
+          {!loading && recentProjects.length > 0 && (
+            <div className="fade-in fade-in-delay-3">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-semibold text-bpspecs-off-white">Recent Projects</h2>
+                <Link 
+                  to="/projects"
+                  className="text-sm text-bpspecs-teal hover:text-bpspecs-teal/80 flex items-center gap-1"
+                >
+                  View All <MoreHorizontal className="w-4 h-4" />
+                </Link>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {recentProjects.slice(0, 3).map((project) => (
+                  <Card key={project.id} className="bg-bpspecs-off-white border-bpspecs-taupe/30 hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
+                    <CardHeader className="pb-3">
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <CardTitle className="text-bpspecs-dark-charcoal text-base mb-1">
+                            {project.title}
+                          </CardTitle>
+                          <CardDescription className="text-bpspecs-taupe text-sm">
+                            {project.description?.slice(0, 80)}...
+                          </CardDescription>
+                        </div>
+                        <Badge className={`${getStatusColor(project.status || 'draft')} text-xs`}>
+                          {project.status || 'draft'}
+                        </Badge>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center text-xs text-bpspecs-taupe">
+                          <Calendar className="w-3 h-3 mr-1" />
+                          {formatDistanceToNow(new Date(project.updated_at), { addSuffix: true })}
+                        </div>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={() => navigate(`/projects/${project.id}`)}
+                          className="h-7 px-2 text-bpspecs-teal hover:bg-bpspecs-teal/10"
+                        >
+                          <Eye className="w-3 h-3 mr-1" />
+                          View
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Feature Cards */}
           <div className="relative fade-in fade-in-delay-3">
             {/* Floating Element */}
             <div className="hidden xl:block absolute -right-20 -top-16">

@@ -14,6 +14,8 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import CreateProject from "./pages/CreateProject";
 import CreateProjectChat from "./pages/CreateProjectChat";
+import Projects from "./pages/Projects";
+import ProjectViewer from "./pages/ProjectViewer";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -52,6 +54,22 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <CreateProject />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/projects" 
+              element={
+                <ProtectedRoute>
+                  <Projects />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/projects/:id" 
+              element={
+                <ProtectedRoute>
+                  <ProjectViewer />
                 </ProtectedRoute>
               } 
             />
