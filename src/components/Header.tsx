@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X, User, LogOut } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
@@ -10,6 +10,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, signOut } = useAuth();
   const { profile } = useProfile();
+  const location = useLocation();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -18,12 +19,21 @@ const Header = () => {
     setIsMenuOpen(false);
   };
 
+  const handleGetStarted = () => {
+    setIsMenuOpen(false);
+  };
+
+  // Don't show header on authenticated dashboard pages
+  if (user && (location.pathname === '/' || location.pathname.startsWith('/create-project'))) {
+    return null;
+  }
+
   return (
     <header className="sticky top-0 z-50 w-full bg-bpspecs-off-white/90 backdrop-blur-sm border-b border-bpspecs-taupe/20">
       <div className="container mx-auto px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
+          <Link to={user ? "/" : "/landing"} className="flex items-center space-x-3">
             <div className="w-10 h-10 flex items-center justify-center">
               <img 
                 src="/lovable-uploads/ef90fafa-e4b6-4c2f-b1b1-eb84d638b33f.png" 
@@ -41,21 +51,23 @@ const Header = () => {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors duration-200">
-              Features
-            </a>
-            <a href="#pricing" className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors duration-200">
-              Pricing
-            </a>
-            <a href="#about" className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors duration-200">
-              About
-            </a>
-            <a href="#contact" className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors duration-200">
-              Contact
-            </a>
-          </nav>
+          {/* Desktop Navigation - only show on landing page */}
+          {!user && (
+            <nav className="hidden md:flex items-center space-x-8">
+              <a href="#features" className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors duration-200">
+                Features
+              </a>
+              <a href="#pricing" className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors duration-200">
+                Pricing
+              </a>
+              <a href="#about" className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors duration-200">
+                About
+              </a>
+              <a href="#contact" className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors duration-200">
+                Contact
+              </a>
+            </nav>
+          )}
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
@@ -82,7 +94,7 @@ const Header = () => {
                     Sign In
                   </Button>
                 </Link>
-                <Link to="/signup">
+                <Link to="/signup" onClick={handleGetStarted}>
                   <Button size="sm" className="bg-bpspecs-teal hover:bg-bpspecs-teal/90 text-bpspecs-off-white font-medium px-6 py-2 rounded-lg shadow-sm">
                     Get Started
                   </Button>
@@ -105,34 +117,39 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden border-t border-bpspecs-taupe/20 py-6 bg-bpspecs-off-white">
             <nav className="flex flex-col space-y-4">
-              <a 
-                href="#features" 
-                className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Features
-              </a>
-              <a 
-                href="#pricing" 
-                className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Pricing
-              </a>
-              <a 
-                href="#about" 
-                className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About
-              </a>
-              <a 
-                href="#contact" 
-                className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contact
-              </a>
+              {!user && (
+                <>
+                  <a 
+                    href="#features" 
+                    className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Features
+                  </a>
+                  <a 
+                    href="#pricing" 
+                    className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Pricing
+                  </a>
+                  <a 
+                    href="#about" 
+                    className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    About
+                  </a>
+                  <a 
+                    href="#contact" 
+                    className="text-sm font-medium text-bpspecs-dark-charcoal hover:text-bpspecs-teal transition-colors py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Contact
+                  </a>
+                </>
+              )}
+              
               <div className="flex flex-col space-y-3 pt-4 border-t border-bpspecs-taupe/20">
                 {user ? (
                   <>
@@ -157,7 +174,7 @@ const Header = () => {
                         Sign In
                       </Button>
                     </Link>
-                    <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
+                    <Link to="/signup" onClick={handleGetStarted}>
                       <Button size="sm" className="bg-bpspecs-teal hover:bg-bpspecs-teal/90 text-bpspecs-off-white justify-start rounded-lg">
                         Get Started
                       </Button>
