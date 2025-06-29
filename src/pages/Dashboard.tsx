@@ -29,7 +29,7 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen flex items-stretch justify-center p-2 sm:p-4 bg-gradient-to-br from-bpspecs-off-white via-bpspecs-beige/50 to-bpspecs-taupe/30">
       {/* Main Card - Now responsive and stretches */}
-      <div className="relative w-full backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden bg-bpspecs-dark-charcoal/95 fade-in">
+      <div className="w-full backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden bg-bpspecs-dark-charcoal/95 fade-in">
         {/* Side Nav */}
         <div className="absolute inset-y-0 left-0 flex flex-col gap-2 sm:gap-3 py-4 sm:py-6 px-2 sm:px-3 items-center bg-bpspecs-off-white fade-in fade-in-delay-1">
           <button className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-105 bg-bpspecs-teal text-bpspecs-off-white hover:bg-bpspecs-teal/80">
@@ -181,10 +181,10 @@ const Dashboard = () => {
           )}
 
           {/* Feature Cards - Enhanced responsive layout */}
-          <div className="relative fade-in fade-in-delay-3">
+          <div className="fade-in fade-in-delay-3">
             {/* Floating Element - Repositioned for larger screens */}
             <div className="hidden 2xl:block absolute -right-8 -top-16">
-              <div className="relative">
+              <div>
                 <div className="w-32 h-32 opacity-20 animate-pulse bg-gradient-to-r rounded-full from-bpspecs-teal to-bpspecs-olive"></div>
                 <div className="absolute top-6 right-6 text-sm font-medium rounded-xl pt-2 pr-4 pb-2 pl-4 shadow-lg text-bpspecs-off-white bg-bpspecs-dark-charcoal border border-bpspecs-taupe/20">
                   Ready to create? ✨
