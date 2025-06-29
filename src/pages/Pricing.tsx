@@ -1,73 +1,37 @@
 
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Check, Zap, Crown, Users, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Check, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { supabase } from '@/integrations/supabase/client';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { pricingTiers } from '@/data/pricing';
 
 const Pricing = () => {
-  const plans = [
-    {
-      name: 'Free',
-      price: '$0',
-      period: '/month',
-      description: 'Perfect for getting started with business planning',
-      features: [
-        '3 business plans per month',
-        'Basic AI analysis',
-        'Standard templates',
-        'PDF export',
-        'Email support',
-      ],
-      limitations: [
-        'Limited AI features',
-        'No version history',
-        'Basic export options',
-      ],
-      buttonText: 'Get Started Free',
-      buttonVariant: 'outline' as const,
-      popular: false,
-    },
-    {
-      name: 'Plus',
-      price: '$29',
-      period: '/month',
-      description: 'Advanced features for growing businesses',
-      features: [
-        'Unlimited business plans',
-        'Advanced AI analysis',
-        'Premium templates',
-        'All export formats (PDF, Word, Markdown)',
-        'Version history & comparison',
-        'Priority support',
-        'Custom branding',
-      ],
-      buttonText: 'Start Plus Trial',
-      buttonVariant: 'default' as const,
-      popular: true,
-    },
-    {
-      name: 'Pro',
-      price: '$79',
-      period: '/month',
-      description: 'Complete solution for teams and agencies',
-      features: [
-        'Everything in Plus',
-        'Team collaboration',
-        'White-label export',
-        'API access',
-        'Custom integrations',
-        'Dedicated account manager',
-        'Phone support',
-        'Advanced analytics',
-      ],
-      buttonText: 'Contact Sales',
-      buttonVariant: 'outline' as const,
-      popular: false,
-    },
-  ];
+  const navigate = useNavigate();
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setIsAuthenticated(!!user);
+    };
+    
+    checkAuth();
+  }, []);
+
+  const handleGetStarted = () => {
+    if (isAuthenticated === null) return; // Still checking auth status
+    
+    if (isAuthenticated) {
+      navigate('/billing');
+    } else {
+      navigate('/signup');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-bpspecs-off-white via-bpspecs-beige/50 to-bpspecs-taupe/30">
@@ -85,41 +49,38 @@ const Pricing = () => {
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
-          {plans.map((plan, index) => (
+        <div className="grid gap-6 md:grid-cols-3 max-w-6xl mx-auto mb-16">
+          {pricingTiers.map((tier, index) => (
             <Card 
-              key={plan.name} 
-              className={`relative ${plan.popular ? 'border-bpspecs-teal shadow-xl scale-105' : 'border-bpspecs-taupe/30'}`}
+              key={tier.name} 
+              className={`relative transition-all duration-300 hover:scale-105 hover:shadow-xl ${
+                tier.popular ? 'border-bpspecs-teal shadow-xl scale-105' : 'border-bpspecs-taupe/30 hover:border-bpspecs-teal/50'
+              }`}
             >
-              {plan.popular && (
+              {tier.popular && (
                 <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-bpspecs-teal to-bpspecs-olive text-white px-4 py-1">
                   Most Popular
                 </Badge>
               )}
               
               <CardHeader className="text-center pb-8">
-                <div className="flex items-center justify-center mb-4">
-                  {plan.name === 'Free' && <Zap className="w-8 h-8 text-bpspecs-teal" />}
-                  {plan.name === 'Plus' && <Crown className="w-8 h-8 text-bpspecs-olive" />}
-                  {plan.name === 'Pro' && <Users className="w-8 h-8 text-bpspecs-taupe" />}
-                </div>
                 <CardTitle className="text-2xl font-bold text-bpspecs-dark-charcoal">
-                  {plan.name}
+                  {tier.name}
                 </CardTitle>
                 <div className="flex items-baseline justify-center gap-1 mb-2">
                   <span className="text-4xl font-bold text-bpspecs-dark-charcoal">
-                    {plan.price}
+                    {tier.price}
                   </span>
-                  <span className="text-bpspecs-taupe">{plan.period}</span>
+                  <span className="text-bpspecs-taupe">{tier.period}</span>
                 </div>
                 <CardDescription className="text-bpspecs-taupe">
-                  {plan.description}
+                  {tier.description}
                 </CardDescription>
               </CardHeader>
               
               <CardContent className="space-y-6">
                 <ul className="space-y-3">
-                  {plan.features.map((feature, featureIndex) => (
+                  {tier.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-bpspecs-teal mt-0.5 flex-shrink-0" />
                       <span className="text-bpspecs-dark-charcoal">{feature}</span>
@@ -127,15 +88,18 @@ const Pricing = () => {
                   ))}
                 </ul>
                 
-                <Link to="/signup" className="block">
-                  <Button 
-                    variant={plan.buttonVariant}
-                    className={`w-full ${plan.popular ? 'bg-gradient-to-r from-bpspecs-teal to-bpspecs-olive hover:from-bpspecs-teal/90 hover:to-bpspecs-olive/90 text-white' : ''}`}
-                  >
-                    {plan.buttonText}
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </Link>
+                <Button 
+                  onClick={handleGetStarted}
+                  disabled={isAuthenticated === null}
+                  className={`w-full transition-all duration-200 ${
+                    tier.popular 
+                      ? 'bg-gradient-to-r from-bpspecs-teal to-bpspecs-olive hover:from-bpspecs-teal/90 hover:to-bpspecs-olive/90 text-white' 
+                      : 'bg-transparent border-2 border-bpspecs-olive text-bpspecs-olive hover:bg-bpspecs-olive hover:text-white'
+                  }`}
+                >
+                  {tier.buttonText}
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
               </CardContent>
             </Card>
           ))}
@@ -149,10 +113,8 @@ const Pricing = () => {
           <p className="text-bpspecs-taupe mb-6">
             We're here to help you choose the right plan for your business needs.
           </p>
-          <Button variant="outline" asChild>
-            <Link to="/about">
-              Contact Sales Team
-            </Link>
+          <Button variant="outline" onClick={() => navigate('/about')}>
+            Contact Sales Team
           </Button>
         </div>
       </div>
