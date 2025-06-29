@@ -2,30 +2,22 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Brain, FileText, Route, Zap, Settings, History, Send, User, Bot } from 'lucide-react';
+import { Brain, FileText, Route, Zap, Settings, History, Send, User, Bot, Sparkles } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
-
-interface Message {
-  id: string;
-  type: 'user' | 'assistant';
-  content: string;
-  timestamp: Date;
-}
+import { useAIChat } from '@/hooks/useAIChat';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
+import BusinessPlanViewer from '@/components/BusinessPlanViewer';
 
 const CreateProjectChat = () => {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: '1',
-      type: 'assistant',
-      content: "Hi! I'm your AI business plan assistant. I'll help you create a comprehensive business specification by asking you some questions. Let's start with your business idea - what problem are you trying to solve?",
-      timestamp: new Date()
-    }
-  ]);
   const [inputValue, setInputValue] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
+  const [currentProject, setCurrentProject] = useState<any>(null);
+  const [generatedPlan, setGeneratedPlan] = useState<string | null>(null);
+  const [showPlanViewer, setShowPlanViewer] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { messages, isTyping, sendMessage, generateBusinessPlan, clearMessages } = useAIChat();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -35,49 +27,41 @@ const CreateProjectChat = () => {
     scrollToBottom();
   }, [messages]);
 
-  const handleSendMessage = async () => {
-    if (!inputValue.trim()) return;
+  useEffect(() => {
+    // Create a new project when the chat starts
+    const createProject = async () => {
+      if (!user || currentProject) return;
 
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      type: 'user',
-      content: inputValue,
-      timestamp: new Date()
+      try {
+        const { data, error } = await supabase
+          .from('projects')
+          .insert({
+            user_id: user.id,
+            title: 'New Business Plan',
+            description: 'AI-generated business plan in progress',
+            original_prompt: 'AI chat conversation',
+            project_type: 'ai_chat',
+            status: 'draft'
+          })
+          .select()
+          .single();
+
+        if (error) throw error;
+        setCurrentProject(data);
+      } catch (error) {
+        console.error('Error creating project:', error);
+        toast.error('Failed to create project');
+      }
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    createProject();
+  }, [user, currentProject]);
+
+  const handleSendMessage = async () => {
+    if (!inputValue.trim() || !currentProject) return;
+
+    await sendMessage(inputValue, currentProject.id);
     setInputValue('');
-    setIsTyping(true);
-
-    // Simulate AI response delay
-    setTimeout(() => {
-      const responses = [
-        "Great! Can you tell me more about your target audience? Who specifically would use your solution?",
-        "That sounds interesting! What type of platform are you envisioning - web app, mobile app, or both?",
-        "Excellent! What's your expected timeline for launching this business?",
-        "Perfect! What's your estimated budget range for development and initial operations?",
-        "Thank you for all that information! I'm now generating your comprehensive business plan specification. This will include market analysis, technical requirements, implementation roadmap, and financial projections."
-      ];
-
-      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-      
-      const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        type: 'assistant',
-        content: randomResponse,
-        timestamp: new Date()
-      };
-
-      setMessages(prev => [...prev, assistantMessage]);
-      setIsTyping(false);
-
-      // If it's the final response, redirect after some time
-      if (randomResponse.includes("generating your comprehensive")) {
-        setTimeout(() => {
-          navigate('/');
-        }, 3000);
-      }
-    }, 1000 + Math.random() * 2000);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -87,9 +71,54 @@ const CreateProjectChat = () => {
     }
   };
 
+  const handleGenerateBusinessPlan = async () => {
+    if (!currentProject) return;
+
+    const plan = await generateBusinessPlan(currentProject.id);
+    if (plan) {
+      setGeneratedPlan(plan);
+      setShowPlanViewer(true);
+    }
+  };
+
+  const handleStartOver = () => {
+    clearMessages();
+    setCurrentProject(null);
+    setGeneratedPlan(null);
+    setShowPlanViewer(false);
+    toast.info('Starting a new conversation...');
+  };
+
+  if (showPlanViewer && generatedPlan) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-bpspecs-off-white via-bpspecs-beige/50 to-bpspecs-taupe/30 p-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-6 flex items-center justify-between">
+            <Button
+              onClick={() => setShowPlanViewer(false)}
+              variant="outline"
+              className="border-bpspecs-taupe/30 hover:bg-bpspecs-beige/30"
+            >
+              ← Back to Chat
+            </Button>
+            <Button
+              onClick={() => navigate('/')}
+              className="bg-bpspecs-teal hover:bg-bpspecs-teal/90 text-bpspecs-off-white"
+            >
+              Save & Go to Dashboard
+            </Button>
+          </div>
+          <BusinessPlanViewer 
+            businessPlan={generatedPlan} 
+            projectTitle={currentProject?.title}
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center sm:p-4 bg-gradient-to-br from-bpspecs-off-white via-bpspecs-beige/50 to-bpspecs-taupe/30 pt-2 pr-2 pb-2 pl-2">
-      {/* Main Card */}
       <div className="relative w-full max-w-6xl backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden bg-bpspecs-dark-charcoal/95 fade-in">
         {/* Side Nav */}
         <div className="absolute inset-y-0 left-0 flex flex-col gap-2 sm:gap-3 sm:py-6 sm:px-3 pt-4 pr-2 pb-4 pl-2 items-center bg-bpspecs-off-white fade-in fade-in-delay-1">
@@ -108,7 +137,10 @@ const CreateProjectChat = () => {
           <button className="w-7 h-7 sm:w-9 sm:h-9 rounded-full ring-1 flex items-center justify-center transition-all duration-200 bg-bpspecs-beige ring-bpspecs-taupe hover:bg-bpspecs-taupe/20 hover:ring-bpspecs-teal">
             <Settings className="sm:w-4 sm:h-4 w-[12px] h-[12px] text-bpspecs-dark-charcoal" />
           </button>
-          <button className="w-7 h-7 sm:w-9 sm:h-9 rounded-full ring-1 flex items-center justify-center transition-all duration-200 mt-auto bg-bpspecs-beige ring-bpspecs-taupe hover:bg-bpspecs-taupe/20 hover:ring-bpspecs-teal">
+          <button 
+            onClick={handleStartOver}
+            className="w-7 h-7 sm:w-9 sm:h-9 rounded-full ring-1 flex items-center justify-center transition-all duration-200 mt-auto bg-bpspecs-beige ring-bpspecs-taupe hover:bg-bpspecs-taupe/20 hover:ring-bpspecs-teal"
+          >
             <History className="sm:w-4 sm:h-4 w-[12px] h-[12px] text-bpspecs-dark-charcoal" />
           </button>
         </div>
@@ -123,9 +155,21 @@ const CreateProjectChat = () => {
               <span className="sm:hidden">BP</span>
               <span className="text-bpspecs-teal">Business Plan Generator</span>
             </div>
-            <h2 className="hidden md:block text-sm font-medium text-bpspecs-taupe">
-              AI Assistant
-            </h2>
+            <div className="flex items-center gap-2">
+              {messages.length > 3 && (
+                <Button
+                  onClick={handleGenerateBusinessPlan}
+                  size="sm"
+                  className="bg-gradient-to-r from-bpspecs-teal to-bpspecs-olive hover:from-bpspecs-teal/80 hover:to-bpspecs-olive/80 text-bpspecs-off-white font-medium"
+                >
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  Generate Plan
+                </Button>
+              )}
+              <h2 className="hidden md:block text-sm font-medium text-bpspecs-taupe">
+                AI Assistant
+              </h2>
+            </div>
           </div>
 
           {/* Chat Messages */}
